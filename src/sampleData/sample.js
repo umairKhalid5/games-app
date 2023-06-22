@@ -29,7 +29,7 @@ const platforms = [
 ];
 
 //? All Games:
-const data1 = {
+export const data1 = {
   count: 850588,
   next: 'https://api.rawg.io/api/games?key=461802735fbb4bc2bf6b7e2fb125f043&page=2&page_size=2',
   previous: null,
