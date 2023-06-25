@@ -16,8 +16,21 @@ h3 {
   max-width: max-content;
   font-size: 1.3rem;
 }
-.details {
+.details,
+.title,
+.moreBtn {
   position: absolute;
+}
+.moreBtn {
+  right: 5%;
+  bottom: 6rem;
+}
+.moreBtn button {
+  font-size: 1.125rem;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 5px 10px rgba(229, 142, 39, 0.4);
+}
+.details {
   left: 5%;
   bottom: 6rem;
   background-color: rgba(22, 26, 30, 0.8);
@@ -26,13 +39,12 @@ h3 {
   color: #fff;
   font-size: 0.875rem;
   text-align: left;
-  width: 180px;
+  /* width: 180px; */
 }
 .details p:not(:last-of-type) {
   margin-bottom: 0.5rem;
 }
 .title {
-  position: absolute;
   left: 5%;
   right: 5%;
   bottom: 2rem;
@@ -43,11 +55,12 @@ h3 {
   font-size: 1rem;
 }
 .details,
-.title {
+.title,
+.moreBtn button {
   opacity: 0.4;
   transition: opacity 0.3s ease;
 }
-.carouselContainer:hover :is(.details, .title) {
+.carouselContainer:hover :is(.details, .title, .moreBtn button) {
   opacity: 1;
 }
 .details p span {
@@ -55,4 +68,44 @@ h3 {
   /* padding: 0.1rem;
   border-radius: 0.2rem;
   font-size: 1rem; */
+}
+
+@media (max-width: 720px) {
+  .details {
+    left: 2%;
+    bottom: 4.2rem;
+    padding: 0.2rem;
+    font-size: 0.875rem;
+  }
+  .title {
+    left: 2%;
+    right: 2%;
+    bottom: 2rem;
+    padding: 0.3rem;
+    font-size: 1rem;
+  }
+  .details p:not(:last-of-type) {
+    margin-bottom: 0.2rem;
+  }
+  .moreBtn {
+    right: 2%;
+    bottom: 4.2rem;
+  }
+  .moreBtn button {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.5rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .carouselContainer.hideInfo .details {
+    display: none;
+  }
+  .carouselContainer.hideInfo .title {
+    font-size: 12px;
+  }
+  .carouselContainer.hideInfo .moreBtn button {
+    font-size: 12px;
+    padding: 0.2rem 0.3rem;
+  }
 }

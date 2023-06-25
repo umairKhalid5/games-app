@@ -181,15 +181,15 @@ nav {
   border-bottom: 1px solid var(--accentClr);
 }
 nav a {
-  gap: 0.5rem;
-  max-width: max-content;
+  /* gap: 0.5rem;
+  max-width: max-content; */
   color: var(--accentClr);
 }
-nav img {
+/* nav img {
   width: 30px;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-}
+} */
 nav h4 {
   font-size: 1.8rem;
 }
@@ -257,4 +257,28 @@ nav .light-dark-mode {
 .rt_bad {
   color: var(--skipLight) !important;
   border: 1px solid var(--skipLight);
+}
+
+@media (max-width: 600px) {
+  nav,
+  .layout {
+    padding-inline: 0.5rem;
+  }
+  nav h4 {
+    font-size: 1.2rem;
+  }
+  nav .searchBar {
+    flex: 0.95;
+  }
+  nav input {
+    padding-inline: 0.6rem;
+  }
+  .light-dark-mode svg {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  nav h4 {
+    font-size: 1.125rem;
+  }
 }

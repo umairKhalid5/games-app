@@ -47,16 +47,20 @@
   gap: 0.5rem;
   /* background-color: brown; */
 }
+.right > div {
+  display: grid;
+  gap: 0.5rem;
+}
 .right h3 {
   width: max-content;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
 }
 .right .genre {
   color: var(--midClr);
   font-weight: 400;
   margin-bottom: 0.5rem;
   margin-top: -0.25rem;
-  min-width: 300px;
+  min-width: max-content;
 }
 .right img {
   width: 15px;
@@ -97,8 +101,54 @@ span.platforms {
 .screenShots img {
   aspect-ratio: 1.777 / 1;
 }
-@media (max-width: 900px) {
+
+@media (max-width: 950px) {
   .expandedCard {
     flex-direction: column;
+    gap: 4rem;
+  }
+  .right {
+    align-items: center;
+  }
+  .right > div {
+    gap: 0.2rem;
+    margin-bottom: 1rem;
+  }
+  .left img {
+    max-width: 320px;
+    margin-top: -3rem;
+  }
+}
+@media (max-width: 950px) {
+  .expandedCard,
+  .screenShots {
+    padding: 0.1rem;
+  }
+}
+@media (max-width: 780px) {
+  .expandedCard .backBtn {
+    top: -7rem;
+  }
+}
+@media (max-width: 600px) {
+  .expandedCard,
+  .screenShots {
+    padding: 0.1rem;
+  }
+  .right h3 {
+    font-size: 1.3rem;
+  }
+  .expandedCard .backBtn {
+    right: -0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .left img {
+    max-width: 280px;
+  }
+}
+@media (max-width: 340px) {
+  .left img {
+    max-width: 230px;
   }
 }

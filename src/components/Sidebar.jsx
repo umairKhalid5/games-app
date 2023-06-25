@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Sidebar = ({ theme }) => {
+const Sidebar = ({ theme, slideIn, setSlideIn }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
 
   const platforms = [
@@ -34,32 +35,71 @@ const Sidebar = ({ theme }) => {
   ];
 
   return (
-    <div className={classes.sidebarContainer}>
-      <h3>Platforms</h3>
-      <ul role="list" className={classes.list}>
-        {platforms.map(platform => (
-          <li key={platform.name} className="flex">
-            <div>
-              <img
-                src={platform.logo}
-                alt={platform.name}
-                style={{
-                  filter: `invert(${inversion})`,
-                }}
-              />
-            </div>
-            <p>{platform.name}</p>
-          </li>
-        ))}
-      </ul>
-      <h3>Genres</h3>
-      <ul role="list" className={classes.list}>
-        {genres.map(platform => (
-          <li key={platform.name} className="flex">
-            <p>{platform.name}</p>
-          </li>
-        ))}
-      </ul>
+    <div
+      className={`${classes.sidebarContainer} ${
+        slideIn ? classes.show : classes.hide
+      }`}
+    >
+      {slideIn && (
+        <>
+          <h3>Platforms</h3>
+          <button
+            className={classes.closeSidebarBtn}
+            onClick={() => setSlideIn(false)}
+          >
+            X
+          </button>
+          <ul role="list" className={classes.list}>
+            {platforms.map(platform => (
+              <li key={platform.name} className="flex">
+                <div>
+                  <img
+                    src={platform.logo}
+                    alt={platform.name}
+                    style={{
+                      filter: `invert(${inversion})`,
+                    }}
+                  />
+                </div>
+                <p>{platform.name}</p>
+              </li>
+            ))}
+          </ul>
+          <h3>Genres</h3>
+          <ul role="list" className={classes.list}>
+            {genres.map(platform => (
+              <li key={platform.name} className="flex">
+                <p>{platform.name}</p>
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {!slideIn && (
+        <div>
+          <MenuIcon
+            onClick={() => {
+              setSlideIn(true);
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            }}
+            sx={{
+              background: '#e58e27',
+              background: '#e58e27',
+              color: theme === 'dark' ? '#f5fbfb' : '#161a1e',
+              cursor: 'pointer',
+              padding: '0.2rem',
+              height: '28px',
+              width: '28px',
+              position: 'fixed',
+              top: '4.8rem',
+              right: '1rem',
+              zIndex: 1,
+              borderRadius: '50%',
+              boxShadow: '0 0 10px rgba(229, 142, 39, 0.35)',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 };

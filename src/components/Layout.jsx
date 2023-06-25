@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 
-const Layout = ({ theme }) => {
+const Layout = ({ theme, slideIn }) => {
   const ratingClass = rating => {
     let classRating;
     if (rating > 79) return (classRating = 'rt_top');
@@ -13,12 +13,13 @@ const Layout = ({ theme }) => {
   };
   return (
     <div className="layout">
-      <ImageSlider ratingClass={ratingClass} />
+      <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
       <Routes>
         <Route
           path="/"
           element={
             <GamesBox
+              slideIn={slideIn}
               title={'All Games'}
               ratingClass={ratingClass}
               theme={theme}

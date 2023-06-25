@@ -5,6 +5,7 @@ import Layout from './components/Layout';
 
 function App() {
   const [theme, setTheme] = useState('light');
+  const [slideIn, setSlideIn] = useState(true);
 
   useEffect(() => {
     if (theme === 'dark') document.body.className = 'dark';
@@ -15,8 +16,8 @@ function App() {
     <>
       <Navbar theme={theme} setTheme={setTheme} />
       <main className="main">
-        <Sidebar theme={theme} />
-        <Layout theme={theme} />
+        <Sidebar theme={theme} slideIn={slideIn} setSlideIn={setSlideIn} />
+        <Layout theme={theme} slideIn={slideIn} />
       </main>
     </>
   );

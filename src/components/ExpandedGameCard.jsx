@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './ExpandedGameCard.module.css';
 import { Rating, Tooltip } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
@@ -9,7 +9,19 @@ const ExpandedGameCard = ({
   inversion,
   platforms,
   ratingClass,
+  onClose,
 }) => {
+  const [winSize, setWinSize] = useState(window.innerWidth);
+  useEffect(() => {
+    const updateWindowSize = () => {
+      const size = window.innerWidth;
+      setWinSize(size);
+    };
+    window.addEventListener('resize', updateWindowSize);
+
+    return () => window.removeEventListener('resize', updateWindowSize);
+  }, []);
+
   return (
     <>
       <div className={`${classes.expandedCard} flex`}>
@@ -38,60 +50,64 @@ const ExpandedGameCard = ({
                 `${genre?.name}${i < game?.genres.length - 1 ? ' | ' : ''}`
             )}
           </p>
-          <p>
-            Metacritic:
-            <span
-              className={ratingClass(game?.metacritic)}
-              style={{ marginTop: '-3px' }}
-            >
-              {game?.metacritic}
-            </span>
-          </p>
-          <p>
-            Released:
-            <span className={classes.date}>{getDate(game?.released)}</span>
-          </p>
-          <p>
-            Platforms:
-            <span className={`${classes.platforms} flex`}>
-              {platforms.map((entry, i) =>
-                game?.parent_platforms?.map(
-                  pt =>
-                    pt?.platform?.id === entry.id && (
-                      <img
-                        key={entry.id}
-                        src={entry.logo}
-                        alt={entry.name}
-                        style={{
-                          filter: `invert(1)`,
-                        }}
-                      />
-                    )
-                )
-              )}
-            </span>
-          </p>
-          <p>
-            Playtime:<span>{game?.playtime} hours</span>
-          </p>
-          {/* <p>
+          <div>
+            <p>
+              Metacritic:
+              <span
+                className={ratingClass(game?.metacritic)}
+                style={{ marginTop: '-3px' }}
+              >
+                {game?.metacritic}
+              </span>
+            </p>
+            <p>
+              Released:
+              <span className={classes.date}>{getDate(game?.released)}</span>
+            </p>
+            <p>
+              Platforms:
+              <span className={`${classes.platforms} flex`}>
+                {platforms.map((entry, i) =>
+                  game?.parent_platforms?.map(
+                    pt =>
+                      pt?.platform?.id === entry.id && (
+                        <img
+                          key={entry.id}
+                          src={entry.logo}
+                          alt={entry.name}
+                          style={{
+                            filter: `invert(1)`,
+                          }}
+                        />
+                      )
+                  )
+                )}
+              </span>
+            </p>
+            <p>
+              Playtime:<span>{game?.playtime} hours</span>
+            </p>
+            {/* <p>
           {game?.tags.map(
               (tag, i) => `${tag?.name}${i < game?.tags.length - 1 ? ', ' : ''}`
               )}
             </p> */}
-          <p>
-            Total Votes:
-            <span>{game?.ratings_count}</span>
-          </p>
-          <p>
-            Collections:
-            <span>{game?.added}</span>
-          </p>
+            <p>
+              Total Votes:
+              <span>{game?.ratings_count}</span>
+            </p>
+            <p>
+              Collections:
+              <span>{game?.added}</span>
+            </p>
+          </div>
           {/* <p>
             Age Rating:<span>{game?.esrb_rating?.name}</span>
           </p> */}
         </div>
-        <button className={classes.backBtn}>Go back</button>
+        <button className={classes.backBtn} onClick={() => onClose()}>
+          Go back
+        </button>
       </div>
       <div className={`${classes.screenShots} flex`}>
         <div className={classes.carouselWrapper}>
@@ -104,7 +120,7 @@ const ExpandedGameCard = ({
             width="100%"
             showThumbs={false}
             centerMode={true}
-            centerSlidePercentage={25}
+            centerSlidePercentage={winSize > 950 ? 25 : winSize < 450 ? 50 : 35}
             selectedItem={2}
             showStatus={false}
           >

@@ -5,7 +5,7 @@ import { data1 } from '../sampleData/sample';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 
-const ImageSlider = ({ ratingClass }) => {
+const ImageSlider = ({ ratingClass, slideIn }) => {
   // const { data, isFetching } = useGetGamesQuery();
 
   // if (isFetching) return;
@@ -15,7 +15,11 @@ const ImageSlider = ({ ratingClass }) => {
   return (
     <>
       <h3>Top Picks</h3>
-      <div className={classes.carouselContainer}>
+      <div
+        className={`${classes.carouselContainer} ${
+          slideIn ? classes.hideInfo : ''
+        }`}
+      >
         <Carousel
           infiniteLoop
           autoPlay
@@ -30,7 +34,7 @@ const ImageSlider = ({ ratingClass }) => {
               <img src={game?.background_image} alt={game?.name} />
               <p className={classes.title}>{game?.name}</p>
               <div className={classes?.details}>
-                <p>Playtime: {game?.playtime} hours</p>
+                {/* <p>Playtime: {game?.playtime} hours</p> */}
                 <p>
                   Metacritic:{' '}
                   <span className={ratingClass(game?.metacritic)}>
@@ -43,6 +47,9 @@ const ImageSlider = ({ ratingClass }) => {
                       `${genre?.name}${i < game?.genres.length - 1 ? ', ' : ''}`
                   )}
                 </p>
+              </div>
+              <div className={classes?.moreBtn}>
+                <button>See Details</button>
               </div>
             </div>
           ))}

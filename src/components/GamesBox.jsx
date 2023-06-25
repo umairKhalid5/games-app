@@ -15,7 +15,7 @@ import classes from './GamesBox.module.css';
 import Modal from './UI/Modal';
 import ExpandedGameCard from './ExpandedGameCard';
 
-const GamesBox = ({ title, ratingClass, theme }) => {
+const GamesBox = ({ title, ratingClass, theme, slideIn }) => {
   const [expandCard, setExpandCard] = useState(false);
   const [gameExpand, setGameExpand] = useState(null);
 
@@ -63,7 +63,9 @@ const GamesBox = ({ title, ratingClass, theme }) => {
     <>
       <h3>{title}</h3>
       <div className={classes.movieBox}>
-        <div className={classes.gamesWrapper}>
+        <div
+          className={`${classes.gamesWrapper} ${slideIn ? classes.resize : ''}`}
+        >
           {allGames.map(game => (
             <div
               key={game?.id}
@@ -123,6 +125,7 @@ const GamesBox = ({ title, ratingClass, theme }) => {
             inversion={inversion}
             platforms={platforms}
             ratingClass={ratingClass}
+            onClose={closeGameCard}
           />
         </Modal>
       )}
