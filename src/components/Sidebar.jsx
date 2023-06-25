@@ -42,7 +42,7 @@ const Sidebar = ({ theme }) => {
             <div>
               <img
                 src={platform.logo}
-                alt=""
+                alt={platform.name}
                 style={{
                   filter: `invert(${inversion})`,
                 }}

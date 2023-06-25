@@ -1,14 +1,30 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Welcome from './Welcome';
+import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 
-const Layout = () => {
+const Layout = ({ theme }) => {
+  const ratingClass = rating => {
+    let classRating;
+    if (rating > 79) return (classRating = 'rt_top');
+    if (rating > 59 && rating < 80) return (classRating = 'rt_good');
+    if (rating > 39 && rating < 60) return (classRating = 'rt_below_avg');
+    if (rating < 40) return (classRating = 'rt_bad');
+  };
   return (
     <div className="layout">
-      <ImageSlider />
+      <ImageSlider ratingClass={ratingClass} />
       <Routes>
-        <Route path="/" element={<Welcome />} />
+        <Route
+          path="/"
+          element={
+            <GamesBox
+              title={'All Games'}
+              ratingClass={ratingClass}
+              theme={theme}
+            />
+          }
+        />
       </Routes>
     </div>
   );

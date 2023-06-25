@@ -1,6 +1,6 @@
 .sidebarContainer {
   padding: 0.7rem 1rem;
-  width: 180px;
+  width: 200px;
   /* background-color: var(--bgClr); */
   color: var(--fgClr);
   border-right: 1px solid var(--accentClr);

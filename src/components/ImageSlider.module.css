@@ -1,6 +1,58 @@
 .carouselContainer {
-  width: 800px;
+  width: min(850px, 95%);
   border-radius: 1rem;
   overflow: hidden;
-  margin: 0.5rem auto 0;
+  margin: 1rem auto 1rem;
+  position: relative;
+  box-shadow: 0 0 10px var(--shadow);
+  box-shadow: 0 0 15px var(--shadow);
+  user-select: none;
+}
+h3 {
+  color: var(--accentClr);
+  border-bottom: 1px solid var(--accentClr);
+  margin-bottom: 0.5rem;
+  font-weight: 900;
+  max-width: max-content;
+  font-size: 1.3rem;
+}
+.details {
+  position: absolute;
+  left: 5%;
+  bottom: 6rem;
+  background-color: rgba(22, 26, 30, 0.8);
+  padding: 0.7rem 0.5rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 0.875rem;
+  text-align: left;
+  width: 180px;
+}
+.details p:not(:last-of-type) {
+  margin-bottom: 0.5rem;
+}
+.title {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 2rem;
+  background-color: rgba(22, 26, 30, 0.8);
+  padding: 0.7rem;
+  border-radius: 0.5rem;
+  color: #fff;
+  font-size: 1rem;
+}
+.details,
+.title {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
+.carouselContainer:hover :is(.details, .title) {
+  opacity: 1;
+}
+.details p span {
+  margin-left: 0.1rem;
+  /* padding: 0.1rem;
+  border-radius: 0.2rem;
+  font-size: 1rem; */
 }

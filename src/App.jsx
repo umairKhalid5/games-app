@@ -16,7 +16,7 @@ function App() {
       <Navbar theme={theme} setTheme={setTheme} />
       <main className="main">
         <Sidebar theme={theme} />
-        <Layout />
+        <Layout theme={theme} />
       </main>
     </>
   );

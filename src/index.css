@@ -71,7 +71,7 @@ body {
   margin-bottom: 2rem;
   overflow-x: hidden;
   transition: color 0.3s ease, background-color 0.3s ease;
-  /* letter-spacing: 0.5px; */
+  letter-spacing: 0.5px;
 }
 
 /* A elements that don't have a class get default styles */
@@ -90,11 +90,12 @@ button {
 }
 
 /* Make images easier to work with */
-/* img,
+img,
 picture {
   max-width: 100%;
   display: block;
-} */
+  object-fit: cover;
+}
 
 /* Inherit fonts for inputs and buttons */
 input,
@@ -142,7 +143,14 @@ select {
 } */
 
 /* //! RESET Ended */
-
+button {
+  border-radius: 0.5rem;
+  background-color: var(--accentClr);
+  color: var(--lightClr);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  box-shadow: 0 0 10px rgba(229, 142, 39, 0.3);
+}
 /* //! Utility Classes */
 .flex {
   display: flex;
@@ -220,4 +228,33 @@ nav .light-dark-mode {
   padding: 0.7rem 1rem;
   width: 100%;
   overflow: hidden;
+}
+.rt_top,
+.rt_good,
+.rt_below_avg,
+.rt_bad {
+  padding: 0.1rem;
+  border-radius: 0.2rem;
+  font-size: 1rem;
+  width: 35px;
+  height: 25px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.rt_top {
+  color: var(--exceptionalLight) !important;
+  border: 1px solid var(--exceptionalLight);
+}
+.rt_good {
+  color: var(--recLight) !important;
+  border: 1px solid var(--recLight);
+}
+.rt_below_avg {
+  color: var(--mehLight) !important;
+  border: 1px solid var(--mehLight);
+}
+.rt_bad {
+  color: var(--skipLight) !important;
+  border: 1px solid var(--skipLight);
 }

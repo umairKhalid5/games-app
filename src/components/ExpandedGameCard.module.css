@@ -1,0 +1,104 @@
+.expandedCard {
+  border-radius: 1rem;
+  padding: 1rem;
+  /* justify-content: space-between; */
+  gap: 2rem;
+  max-width: 100%;
+  user-select: none;
+  position: relative;
+}
+.left {
+  position: relative;
+}
+.expandedCard .backBtn {
+  position: absolute;
+  right: -1rem;
+  top: -3.6rem;
+}
+.left img,
+.screenShots img {
+  aspect-ratio: 1.77 / 1;
+  object-fit: cover;
+}
+.left img {
+  max-width: 450px;
+  /* position: absolute; */
+  /* bottom: -7rem; */
+  margin-top: -8rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(229, 142, 39, 0.35);
+}
+.left p,
+.left button {
+  position: absolute;
+  left: 50%;
+  translate: -50% 0;
+}
+.left button {
+  bottom: -1rem;
+  box-shadow: 0 3px 10px rgba(229, 142, 39, 0.3);
+}
+.left p {
+  bottom: -3.6rem;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* background-color: brown; */
+}
+.right h3 {
+  width: max-content;
+  font-size: 1.8rem;
+}
+.right .genre {
+  color: var(--midClr);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  margin-top: -0.25rem;
+  min-width: 300px;
+}
+.right img {
+  width: 15px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: inline-block;
+}
+.right p,
+.left p {
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--lightClr);
+}
+.right p span,
+.left p span {
+  color: var(--accentClr);
+  font-weight: 400;
+}
+
+span.platforms {
+  gap: 0.4rem;
+}
+.screenShots {
+  padding: 1rem;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: center;
+  max-width: 850px;
+}
+.screenShots .carouselWrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(229, 142, 39, 0.35);
+}
+.screenShots img {
+  aspect-ratio: 1.777 / 1;
+}
+@media (max-width: 900px) {
+  .expandedCard {
+    flex-direction: column;
+  }
+}
