@@ -15,11 +15,18 @@ import classes from './GamesBox.module.css';
 import Modal from './UI/Modal';
 import ExpandedGameCard from './ExpandedGameCard';
 
-const GamesBox = ({ title, ratingClass, theme, slideIn }) => {
+const GamesBox = ({
+  title,
+  ratingClass,
+  slideIn,
+  winSize,
+  platforms,
+  getDate,
+  inversion,
+}) => {
   const [expandCard, setExpandCard] = useState(false);
   const [gameExpand, setGameExpand] = useState(null);
 
-  const inversion = theme === 'light' ? '0%' : '100%';
   // const { data, isFetching } = useGetGamesQuery();
   // const { data, isFetching } = useGetGameByIDQuery(3498);
 
@@ -35,22 +42,12 @@ const GamesBox = ({ title, ratingClass, theme, slideIn }) => {
 
   // console.log(data);
 
-  const platforms = [
-    { logo: 'src/assets/windows.png', name: 'PC', id: 1 },
-    { logo: 'src/assets/playstation.png', name: 'Playstation', id: 2 },
-    { logo: 'src/assets/xbox.png', name: 'Xbox', id: 3 },
-    { logo: 'src/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  ];
-
-  let options = {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  };
-  const getDate = date => {
-    const dateToUse = new Date(date);
-    return new Intl.DateTimeFormat('en-US', options).format(dateToUse);
-  };
+  // const platforms = [
+  //   { logo: 'src/assets/windows.png', name: 'PC', id: 1 },
+  //   { logo: 'src/assets/playstation.png', name: 'Playstation', id: 2 },
+  //   { logo: 'src/assets/xbox.png', name: 'Xbox', id: 3 },
+  //   { logo: 'src/assets/nintendo.png', name: 'Nintendo', id: 7 },
+  // ];
 
   const expandGameCard = game => {
     setGameExpand(game);
@@ -78,7 +75,7 @@ const GamesBox = ({ title, ratingClass, theme, slideIn }) => {
 
               <div className={classes.moreDetails}>
                 <span className={classes.platforms}>
-                  {platforms.map((entry, i) =>
+                  {platforms.map(entry =>
                     game?.parent_platforms?.map(
                       pt =>
                         pt?.platform?.id === entry.id && (
@@ -126,6 +123,7 @@ const GamesBox = ({ title, ratingClass, theme, slideIn }) => {
             platforms={platforms}
             ratingClass={ratingClass}
             onClose={closeGameCard}
+            winSize={winSize}
           />
         </Modal>
       )}

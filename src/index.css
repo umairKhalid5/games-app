@@ -27,11 +27,13 @@ html {
   --mehDark: #6e3e1f;
   --skipLight: #b3424b;
   --skipDark: #6e1f24;
+  --bgOverlay: rgba(22, 26, 30, 0.8);
 }
 .light {
   --bgClr: var(--lightClr);
   --fgClr: var(--darkClr);
   --shadow: hsl(240, 7%, 5%, 0.3);
+  --bgOverlay: rgba(245, 251, 251, 0.8);
 }
 /* Remove default margin */
 body,
@@ -93,7 +95,7 @@ button {
 img,
 picture {
   max-width: 100%;
-  display: block;
+  /* display: block; */
   object-fit: cover;
 }
 
@@ -173,12 +175,15 @@ nav {
   background-color: var(--bgClr);
   color: var(--fgClr);
   padding: 0.7rem 1rem;
-  /* box-shadow: 0 0 15px var(--shadow); */
+  box-shadow: 0 0 15px var(--shadow);
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 100;
   justify-content: space-between;
   border-bottom: 1px solid var(--accentClr);
+}
+.navbar {
+  gap: 0.1rem;
 }
 nav a {
   /* gap: 0.5rem;
@@ -218,7 +223,8 @@ nav .light-dark-mode {
   display: grid;
   place-items: center;
 }
-.light-dark-mode svg {
+.light-dark-mode svg,
+.menuBtn svg {
   font-size: 2rem;
 }
 .main {
@@ -227,7 +233,7 @@ nav .light-dark-mode {
 .layout {
   padding: 0.7rem 1rem;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .rt_top,
 .rt_good,
@@ -242,27 +248,23 @@ nav .light-dark-mode {
   justify-content: center;
   align-items: center;
 }
-.rt_top {
+.excellent {
   color: var(--exceptionalLight) !important;
-  border: 1px solid var(--exceptionalLight);
 }
-.rt_good {
+.good {
   color: var(--recLight) !important;
-  border: 1px solid var(--recLight);
 }
-.rt_below_avg {
+.average {
   color: var(--mehLight) !important;
-  border: 1px solid var(--mehLight);
 }
-.rt_bad {
+.poor {
   color: var(--skipLight) !important;
-  border: 1px solid var(--skipLight);
 }
 
 @media (max-width: 600px) {
   nav,
   .layout {
-    padding-inline: 0.5rem;
+    padding-inline: 0.3rem;
   }
   nav h4 {
     font-size: 1.2rem;
@@ -273,12 +275,17 @@ nav .light-dark-mode {
   nav input {
     padding-inline: 0.6rem;
   }
-  .light-dark-mode svg {
+  .light-dark-mode svg,
+  .menuBtn svg {
     font-size: 1.5rem;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   nav h4 {
     font-size: 1.125rem;
+  }
+  nav input {
+    padding-block: 0.5rem;
+    border-width: 1px;
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
-import MenuIcon from '@mui/icons-material/Menu';
 
 const Sidebar = ({ theme, slideIn, setSlideIn }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
@@ -73,32 +72,15 @@ const Sidebar = ({ theme, slideIn, setSlideIn }) => {
               </li>
             ))}
           </ul>
+          <button
+            className={classes.topBtn}
+            onClick={() =>
+              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+            }
+          >
+            ⬆️
+          </button>
         </>
-      )}
-      {!slideIn && (
-        <div>
-          <MenuIcon
-            onClick={() => {
-              setSlideIn(true);
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-            }}
-            sx={{
-              background: '#e58e27',
-              background: '#e58e27',
-              color: theme === 'dark' ? '#f5fbfb' : '#161a1e',
-              cursor: 'pointer',
-              padding: '0.2rem',
-              height: '28px',
-              width: '28px',
-              position: 'fixed',
-              top: '4.8rem',
-              right: '1rem',
-              zIndex: 1,
-              borderRadius: '50%',
-              boxShadow: '0 0 10px rgba(229, 142, 39, 0.35)',
-            }}
-          />
-        </div>
       )}
     </div>
   );

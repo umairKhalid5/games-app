@@ -141,8 +141,6 @@ span.platforms {
   .expandedCard .backBtn {
     right: -0.5rem;
   }
-}
-@media (max-width: 600px) {
   .left img {
     max-width: 280px;
   }

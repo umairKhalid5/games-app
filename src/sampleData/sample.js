@@ -1406,7 +1406,7 @@ export const data1 = {
 };
 
 //? One Game by ID:
-const date2 = {
+export const singleGame = {
   id: 3498,
   slug: 'grand-theft-auto-v',
   name: 'Grand Theft Auto V',

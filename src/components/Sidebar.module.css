@@ -7,6 +7,7 @@
   transition: width 0.3s ease;
   z-index: 2;
   overflow: hidden;
+  margin-bottom: 3rem;
 }
 .sidebarContainer.show {
   width: 200px;
@@ -74,10 +75,20 @@
   opacity: 0.6;
   scale: 0.9;
 }
+.topBtn {
+  margin-top: 0.5rem;
+  border-radius: 50%;
+  height: 60px;
+  width: 60px;
+  position: fixed;
+  bottom: 1rem;
+  font-size: 1.2rem;
+  box-shadow: 0 0 20px rgba(229, 142, 39, 0.7);
+}
 
 @media (max-width: 600px) {
   .sidebarContainer {
-    padding-inline: 0.5rem;
+    padding-inline: 0.3rem;
   }
   .list li {
     margin-left: 0rem;
@@ -99,5 +110,17 @@
   }
   .sidebarContainer svg {
     right: 0.5rem !important;
+  }
+  .topBtn {
+    left: 0.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .list li {
+    gap: 0.2rem;
+  }
+  .list li div {
+    height: 12px;
   }
 }

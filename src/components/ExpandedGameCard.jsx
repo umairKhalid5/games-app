@@ -10,18 +10,8 @@ const ExpandedGameCard = ({
   platforms,
   ratingClass,
   onClose,
+  winSize,
 }) => {
-  const [winSize, setWinSize] = useState(window.innerWidth);
-  useEffect(() => {
-    const updateWindowSize = () => {
-      const size = window.innerWidth;
-      setWinSize(size);
-    };
-    window.addEventListener('resize', updateWindowSize);
-
-    return () => window.removeEventListener('resize', updateWindowSize);
-  }, []);
-
   return (
     <>
       <div className={`${classes.expandedCard} flex`}>

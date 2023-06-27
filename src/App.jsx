@@ -6,6 +6,17 @@ import Layout from './components/Layout';
 function App() {
   const [theme, setTheme] = useState('light');
   const [slideIn, setSlideIn] = useState(true);
+  const [winSize, setWinSize] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const updateWindowSize = () => {
+      const size = window.innerWidth;
+      setWinSize(size);
+    };
+    window.addEventListener('resize', updateWindowSize);
+
+    return () => window.removeEventListener('resize', updateWindowSize);
+  }, []);
 
   useEffect(() => {
     if (theme === 'dark') document.body.className = 'dark';
@@ -14,10 +25,10 @@ function App() {
 
   return (
     <>
-      <Navbar theme={theme} setTheme={setTheme} />
+      <Navbar theme={theme} setTheme={setTheme} setSlideIn={setSlideIn} />
       <main className="main">
         <Sidebar theme={theme} slideIn={slideIn} setSlideIn={setSlideIn} />
-        <Layout theme={theme} slideIn={slideIn} />
+        <Layout theme={theme} slideIn={slideIn} winSize={winSize} />
       </main>
     </>
   );

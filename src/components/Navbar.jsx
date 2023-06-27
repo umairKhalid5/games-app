@@ -3,13 +3,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({ theme, setTheme }) => {
+const Navbar = ({ theme, setTheme, setSlideIn }) => {
   const toggleTheme = () => {
     setTheme(theme => (theme === 'light' ? 'dark' : 'light'));
   };
   return (
     <nav className="navbar flex">
+      <div className="menuBtn flex">
+        <MenuIcon
+          onClick={() => {
+            setSlideIn(prev => !prev);
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          }}
+          sx={{
+            color: '#e58e27',
+            cursor: 'pointer',
+          }}
+        />
+      </div>
       <div>
         <Link to="/" className="flex">
           {/* <img src={logo} alt="" /> */}
