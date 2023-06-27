@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const Sidebar = ({ theme, slideIn, setSlideIn }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
@@ -46,7 +48,7 @@ const Sidebar = ({ theme, slideIn, setSlideIn }) => {
             className={classes.closeSidebarBtn}
             onClick={() => setSlideIn(false)}
           >
-            X
+            <ArrowBackIcon />
           </button>
           <ul role="list" className={classes.list}>
             {platforms.map(platform => (
@@ -72,16 +74,14 @@ const Sidebar = ({ theme, slideIn, setSlideIn }) => {
               </li>
             ))}
           </ul>
-          <button
-            className={classes.topBtn}
-            onClick={() =>
-              window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
-            }
-          >
-            ⬆️
-          </button>
         </>
       )}
+      <button
+        className={classes.topBtn}
+        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
+      >
+        <ArrowUpwardIcon />
+      </button>
     </div>
   );
 };

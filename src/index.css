@@ -28,12 +28,14 @@ html {
   --skipLight: #b3424b;
   --skipDark: #6e1f24;
   --bgOverlay: rgba(22, 26, 30, 0.8);
+  --fontClr: rgba(214, 214, 214, 0.8);
 }
 .light {
   --bgClr: var(--lightClr);
   --fgClr: var(--darkClr);
   --shadow: hsl(240, 7%, 5%, 0.3);
   --bgOverlay: rgba(245, 251, 251, 0.8);
+  --fontClr: rgba(41, 41, 41, 0.8);
 }
 /* Remove default margin */
 body,
@@ -89,6 +91,10 @@ a {
 button {
   border: none;
   cursor: pointer;
+  transition: scale 0.3s ease;
+}
+button:active {
+  scale: 0.95;
 }
 
 /* Make images easier to work with */
@@ -186,17 +192,27 @@ nav {
   gap: 0.1rem;
 }
 nav a {
-  /* gap: 0.5rem;
-  max-width: max-content; */
   color: var(--accentClr);
 }
-/* nav img {
-  width: 30px;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-} */
 nav h4 {
   font-size: 1.8rem;
+}
+nav h4,
+nav .menuBtn,
+.light-dark-mode {
+  transition: scale 0.3s ease, background-color 0.3s ease;
+  padding: 0.1rem;
+  border-radius: 0.5rem;
+}
+nav h4:active,
+nav .menuBtn:active,
+.light-dark-mode:active {
+  scale: 0.85;
+}
+nav h4:hover,
+nav .menuBtn:hover,
+.light-dark-mode:hover {
+  background-color: hsl(33, 79%, 53%, 0.15);
 }
 nav .searchBar {
   flex: 0.9;
@@ -209,7 +225,7 @@ nav input {
   border: 2px solid var(--accentClr);
   background-color: hsl(33, 79%, 53%, 0.35);
   color: var(--fgClr);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 nav input::placeholder {
   color: hsl(33, 79%, 53%, 0.8);
@@ -217,6 +233,9 @@ nav input::placeholder {
 nav input:hover,
 nav input:focus {
   background-color: var(--bgClr);
+}
+nav input:focus {
+  box-shadow: 0 2px 5px var(--shadow);
 }
 nav .light-dark-mode {
   cursor: pointer;
@@ -233,6 +252,7 @@ nav .light-dark-mode {
 .layout {
   padding: 0.7rem 1rem;
   width: 100%;
+
   /* overflow: hidden; */
 }
 .rt_top,
@@ -260,6 +280,22 @@ nav .light-dark-mode {
 .poor {
   color: var(--skipLight) !important;
 }
+.rt_top {
+  color: var(--exceptionalLight) !important;
+  border: 1px solid var(--exceptionalLight);
+}
+.rt_good {
+  color: var(--recLight) !important;
+  border: 1px solid var(--recLight);
+}
+.rt_below_avg {
+  color: var(--mehLight) !important;
+  border: 1px solid var(--mehLight);
+}
+.rt_bad {
+  color: var(--skipLight) !important;
+  border: 1px solid var(--skipLight);
+}
 
 @media (max-width: 600px) {
   nav,
@@ -277,15 +313,19 @@ nav .light-dark-mode {
   }
   .light-dark-mode svg,
   .menuBtn svg {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
   }
 }
 @media (max-width: 480px) {
   nav h4 {
-    font-size: 1.125rem;
+    font-size: 1rem;
   }
   nav input {
     padding-block: 0.5rem;
     border-width: 1px;
+  }
+  .light-dark-mode svg,
+  .menuBtn svg {
+    font-size: 1.2rem;
   }
 }

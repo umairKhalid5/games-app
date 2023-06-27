@@ -24,18 +24,18 @@
   position: absolute;
   right: 0.3rem;
   top: 0.3rem;
-  background-color: var(--accentClr);
-  color: var(--fgClr);
-  font-weight: 900;
-  font-size: 1rem;
+  /* color: var(--fgClr); */
   box-shadow: 0 0 5px rgba(229, 142, 39, 0.3);
-  border-radius: 50%;
   padding: 0.1rem;
-  height: 25px;
-  width: 25px;
+}
+.closeSidebarBtn,
+.topBtn {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.closeSidebarBtn svg {
+  font-size: 1.2rem;
 }
 .sidebarContainer h3 {
   color: var(--accentClr);
@@ -76,13 +76,12 @@
   scale: 0.9;
 }
 .topBtn {
-  margin-top: 0.5rem;
   border-radius: 50%;
-  height: 60px;
-  width: 60px;
+  height: 50px;
+  width: 50px;
   position: fixed;
+  right: 0.3rem;
   bottom: 1rem;
-  font-size: 1.2rem;
   box-shadow: 0 0 20px rgba(229, 142, 39, 0.7);
 }
 
@@ -111,9 +110,6 @@
   .sidebarContainer svg {
     right: 0.5rem !important;
   }
-  .topBtn {
-    left: 0.5rem;
-  }
 }
 
 @media (max-width: 400px) {
@@ -122,5 +118,12 @@
   }
   .list li div {
     height: 12px;
+  }
+  .topBtn {
+    height: 40px;
+    width: 40px;
+  }
+  .topBtn svg {
+    font-size: 1.4rem;
   }
 }

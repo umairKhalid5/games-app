@@ -17,7 +17,7 @@
   padding: 0.7rem;
   border-radius: 1rem;
   overflow: hidden;
-  transition: box-shadow 0.3s ease, scale 0.3s ease;
+  transition: box-shadow 0.3s ease, scale 0.3s ease, opacity 0.3s ease;
   display: grid;
   gap: 0.4rem;
   position: relative;
@@ -36,6 +36,7 @@
 }
 .gamesWrapper:has(.gamePoster:hover) .gamePoster:not(:hover) {
   scale: 0.9;
+  opacity: 0.5;
 }
 .title {
   font-weight: bold;
