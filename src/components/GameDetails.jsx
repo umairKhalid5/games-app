@@ -5,10 +5,19 @@ import classes from './GameDetails.module.css';
 import parse from 'html-react-parser';
 import { Rating, Tooltip } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import GameVideos from './GameVideos';
 
-const GameDetails = ({ ratingClass, platforms, getDate, inversion }) => {
+const yTKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+
+const GameDetails = ({
+  ratingClass,
+  platforms,
+  getDate,
+  inversion,
+  winSize,
+}) => {
   const params = useParams();
-  //   console.log(params?.gameId);
+  // console.log(params?.gameId);
 
   const [seeMore, setSeeMore] = useState(false);
 
@@ -46,6 +55,7 @@ const GameDetails = ({ ratingClass, platforms, getDate, inversion }) => {
       <h2>{data?.name}</h2>
       <div className={classes.details}>
         {/* <div className={classes.mainWrapper}> */}
+        {/* //? Left Section */}
         <div className={classes.left}>
           {/* <div> */}
           <p>
@@ -118,7 +128,7 @@ const GameDetails = ({ ratingClass, platforms, getDate, inversion }) => {
             Description:
             <span className={classes.desc}>
               {!seeMore &&
-                getFirstPara(data?.description.slice(0, 150) + '...')}
+                getFirstPara(data?.description.slice(0, 265) + '...')}
               {seeMore && getFirstPara(data?.description)}
               <button
                 className={classes.toggleBtn}
@@ -172,10 +182,11 @@ const GameDetails = ({ ratingClass, platforms, getDate, inversion }) => {
 
         {/* //?Right Side for Videos & SSs */}
         <div className={classes.right}>
-          <p>Trailers</p>
-          <p>Game Videos</p>
-          <p>Screen Shots</p>
-          <p>Buy From</p>
+          <GameVideos
+            game={data?.name}
+            gameID={params?.gameId}
+            winSize={winSize}
+          />
         </div>
         {/* </div> */}
       </div>

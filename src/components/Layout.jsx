@@ -73,6 +73,7 @@ const Layout = ({ theme, slideIn, winSize }) => {
               platforms={platforms}
               getDate={getDate}
               inversion={inversion}
+              winSize={winSize}
             />
           }
         />

@@ -1,0 +1,16 @@
+.videosContainer {
+  max-width: 100%;
+  max-height: 100%;
+  display: grid;
+  gap: 0.5rem;
+}
+.trailers,
+.videos {
+  background-color: rgba(0, 0, 0, 1);
+  box-shadow: 0 0 15px var(--shadow);
+}
+.trailers,
+.videos {
+  border-radius: 1rem;
+  overflow: hidden;
+}

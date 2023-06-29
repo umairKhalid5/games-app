@@ -1,13 +1,12 @@
 .detailsContainer {
   width: 100%;
   margin-inline: auto;
-  position: relative;
+  /* position: relative; */
   /* box-shadow: 0 0 12px var(--shadow); */
   border-radius: 1rem;
 }
 .detailsContainer h2 {
   font-size: 2.8rem;
-  line-height: 0.9;
   margin: 0.5rem auto 2rem;
   color: var(--accentClr);
   border-bottom: 2px solid var(--accentClr);
@@ -18,6 +17,7 @@
   width: 100%;
   aspect-ratio: 1.777;
   inset: 0;
+  top: 60px;
   overflow: hidden;
   z-index: -1;
 }
@@ -35,6 +35,7 @@
   /* padding: 1rem; */
   display: grid;
   grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
   /* padding: 1rem; */
   border-radius: 1rem;
 }
@@ -42,10 +43,10 @@
 } */
 /* .left {
   background-color: aquamarine;
-} */
+}
 .right {
   background-color: rgb(58, 58, 58, 0.1);
-}
+} */
 .left {
   display: grid;
   gap: 0.5rem;
@@ -99,20 +100,20 @@ span.platforms {
   color: var(--accentClr);
   text-decoration: underline;
   cursor: pointer;
+  word-break: break-all;
 }
 .ratingList {
   font-weight: bold;
   font-size: 14px;
 }
 .ratingList ul {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 0.3rem;
-  flex-wrap: wrap;
 }
 .ratingList ul li {
   display: flex;
   align-items: center;
-  flex: 1;
 }
 .ratingList ul li p {
   color: var(--fgClr);
@@ -125,11 +126,12 @@ span.platforms {
 .bottomDetails {
   margin-top: 3rem;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 0.4rem;
 }
 .bottomDetails h4 {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(180px, 1fr);
   font-size: 1.2rem;
   color: var(--accentClr);
   margin-bottom: 0.2rem;
@@ -146,9 +148,23 @@ span.platforms {
 
 @media (max-width: 1000px) {
   .details {
-    grid-template-columns: minmax(190px, 1fr);
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
-  .left h2 {
+  .detailsContainer h2 {
+    font-size: 1.8rem;
+    margin: 0 auto 0.3rem;
+  }
+}
+@media (max-width: 400px) {
+  .detailsContainer h2 {
     font-size: 1.2rem;
+  }
+  .left p {
+    flex-wrap: wrap;
+  }
+  .desc p {
+    font-size: 14px;
+    display: block;
   }
 }

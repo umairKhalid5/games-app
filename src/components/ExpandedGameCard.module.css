@@ -115,7 +115,7 @@ span.platforms {
     margin-bottom: 1rem;
   }
   .left img {
-    max-width: 320px;
+    max-width: 380px;
     margin-top: -3rem;
   }
 }
@@ -127,7 +127,7 @@ span.platforms {
 }
 @media (max-width: 780px) {
   .expandedCard .backBtn {
-    top: -7rem;
+    top: -5.6rem;
   }
 }
 @media (max-width: 600px) {
@@ -141,12 +141,19 @@ span.platforms {
   .expandedCard .backBtn {
     right: -0.5rem;
   }
+}
+@media (max-width: 480px) {
   .left img {
-    max-width: 280px;
+    max-width: 320px;
+  }
+}
+@media (max-width: 370px) {
+  .left img {
+    max-width: 290px;
   }
 }
 @media (max-width: 340px) {
   .left img {
-    max-width: 230px;
+    max-width: 250px;
   }
 }

@@ -77,11 +77,6 @@ const ExpandedGameCard = ({
             <p>
               Playtime:<span>{game?.playtime} hours</span>
             </p>
-            {/* <p>
-          {game?.tags.map(
-              (tag, i) => `${tag?.name}${i < game?.tags.length - 1 ? ', ' : ''}`
-              )}
-            </p> */}
             <p>
               Total Votes:
               <span>{game?.ratings_count}</span>
@@ -91,9 +86,6 @@ const ExpandedGameCard = ({
               <span>{game?.added}</span>
             </p>
           </div>
-          {/* <p>
-            Age Rating:<span>{game?.esrb_rating?.name}</span>
-          </p> */}
         </div>
         <button className={classes.backBtn} onClick={() => onClose()}>
           Go back
@@ -110,7 +102,7 @@ const ExpandedGameCard = ({
             width="100%"
             showThumbs={false}
             centerMode={true}
-            centerSlidePercentage={winSize > 950 ? 25 : winSize < 450 ? 50 : 35}
+            centerSlidePercentage={winSize > 950 ? 35 : winSize < 450 ? 50 : 35}
             selectedItem={2}
             showStatus={false}
           >

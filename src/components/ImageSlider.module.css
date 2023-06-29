@@ -7,6 +7,7 @@
   box-shadow: 0 0 10px var(--shadow);
   box-shadow: 0 0 15px var(--shadow);
   user-select: none;
+  cursor: grab;
 }
 h3 {
   color: var(--accentClr);
