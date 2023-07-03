@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import classes from './ExpandedGameCard.module.css';
 import { Rating, Tooltip } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
+import { useNavigate } from 'react-router-dom';
 
 const ExpandedGameCard = ({
   game,
@@ -12,12 +13,18 @@ const ExpandedGameCard = ({
   onClose,
   winSize,
 }) => {
+  const navigate = useNavigate();
+  const detailsHandler = id => {
+    navigate(`/details/${id}`);
+    onClose();
+  };
+
   return (
     <>
       <div className={`${classes.expandedCard} flex`}>
         <div className={classes.left}>
           <img src={game?.background_image} alt={game?.name} />
-          <button>See Details</button>
+          <button onClick={() => detailsHandler(game?.id)}>See Details</button>
           <p>
             Rating:
             <Tooltip title={game?.rating} placement="right-start">

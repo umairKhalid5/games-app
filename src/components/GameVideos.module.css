@@ -3,14 +3,22 @@
   max-height: 100%;
   display: grid;
   gap: 0.5rem;
+  user-select: none;
 }
-.trailers,
-.videos {
+.videosContainer > div:not(.stores) {
   background-color: rgba(0, 0, 0, 1);
   box-shadow: 0 0 15px var(--shadow);
-}
-.trailers,
-.videos {
   border-radius: 1rem;
   overflow: hidden;
+}
+.stores {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 0.5rem;
+}
+.stores button {
+  transition: opacity 0.3s ease;
+}
+.stores:has(button:hover) button:not(:hover) {
+  opacity: 0.6;
 }

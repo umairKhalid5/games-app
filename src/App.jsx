@@ -8,6 +8,13 @@ function App() {
   const [slideIn, setSlideIn] = useState(true);
   const [winSize, setWinSize] = useState(window.innerWidth);
 
+  const platforms = [
+    { logo: '/assets/windows.png', name: 'PC', id: 1 },
+    { logo: '/assets/playstation.png', name: 'Playstation', id: 2 },
+    { logo: '/assets/xbox.png', name: 'Xbox', id: 3 },
+    { logo: '/assets/nintendo.png', name: 'Nintendo', id: 7 },
+  ];
+
   useEffect(() => {
     const updateWindowSize = () => {
       const size = window.innerWidth;
@@ -27,8 +34,18 @@ function App() {
     <>
       <Navbar theme={theme} setTheme={setTheme} setSlideIn={setSlideIn} />
       <main className="main">
-        <Sidebar theme={theme} slideIn={slideIn} setSlideIn={setSlideIn} />
-        <Layout theme={theme} slideIn={slideIn} winSize={winSize} />
+        <Sidebar
+          theme={theme}
+          slideIn={slideIn}
+          setSlideIn={setSlideIn}
+          platforms={platforms}
+        />
+        <Layout
+          theme={theme}
+          slideIn={slideIn}
+          winSize={winSize}
+          platforms={platforms}
+        />
       </main>
     </>
   );

@@ -12,24 +12,31 @@
   border-bottom: 2px solid var(--accentClr);
   width: fit-content;
 }
-.image {
-  position: fixed;
+.image,
+.image img {
+  position: absolute;
   width: 100%;
-  aspect-ratio: 1.777;
+  min-height: 100vh;
   inset: 0;
-  top: 60px;
+}
+.image {
+  /* top: 60px; */
+  /* height: 100vh; */
   overflow: hidden;
   z-index: -1;
 }
-.image img {
-  max-width: 100%;
-}
+/* .image img {
+  top: 60px;
+  aspect-ratio: 1.777 / 1;
+} */
 .image::after {
   content: '';
   position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   background: var(--bgOverlay);
-  background: linear-gradient(0deg, var(--bgClr) 10%, var(--bgOverlay) 25%);
+  background: linear-gradient(0deg, var(--bgClr) 5%, var(--bgOverlay) 30%);
 }
 .details {
   /* padding: 1rem; */
@@ -121,13 +128,17 @@ span.platforms {
 .ratingList ul li svg {
   margin-bottom: 0.2rem;
 }
-
+/* //? SERIES & ADDITIONS */
+.siblings {
+  /* padding: 0.5rem; */
+  /* margin-bottom: 1rem; */
+}
 /* //? BOTTOM DETAILS */
 .bottomDetails {
   margin-top: 3rem;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.4rem;
+  gap: 0.8rem;
 }
 .bottomDetails h4 {
   display: grid;
@@ -145,6 +156,35 @@ span.platforms {
   font-size: 15px;
   margin-bottom: 0.1rem;
 }
+/* //? DEVS INFO */
+.devsInfo {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.5rem;
+}
+.devsInfo li {
+  background-color: rgb(229, 142, 39, 0.3);
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  gap: 0.3rem;
+  box-shadow: 0 0 7px rgba(229, 142, 39, 0.3);
+}
+.devsInfo li p {
+  font-size: 14px;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: baseline;
+}
+.devsInfo li p span {
+  text-transform: capitalize;
+  font-weight: normal;
+  font-size: 12px;
+}
+.devsInfo img {
+  max-width: 40px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+}
 
 @media (max-width: 1000px) {
   .details {
@@ -154,6 +194,25 @@ span.platforms {
   .detailsContainer h2 {
     font-size: 1.8rem;
     margin: 0 auto 0.3rem;
+  }
+}
+@media (max-width: 600px) {
+  /* .devsInfo {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  } */
+  .devsInfo li p {
+    font-size: 13px;
+  }
+  .devsInfo img {
+    max-width: 25px;
+  }
+}
+@media (max-width: 480px) {
+  .devsInfo li p {
+    width: 100%;
+    flex-direction: row;
+    gap: 0.3rem;
+    justify-content: space-between;
   }
 }
 @media (max-width: 400px) {

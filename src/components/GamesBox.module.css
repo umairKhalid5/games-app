@@ -5,7 +5,11 @@
 .gamesWrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* place-content: center; */
   gap: 1rem;
+}
+.gamesWrapper.small {
+  grid-template-columns: repeat(auto-fit, 220px);
 }
 .gamePoster {
   background: rgba(229, 142, 39, 0.4);
@@ -32,7 +36,7 @@
 }
 .gamePoster:hover {
   box-shadow: 0 0 15px rgba(229, 142, 39, 0.5);
-  scale: 1.1;
+  scale: 1.05;
 }
 .gamesWrapper:has(.gamePoster:hover) .gamePoster:not(:hover) {
   scale: 0.9;
@@ -75,13 +79,29 @@
   font-size: 15px;
 }
 
+@media (max-width: 1000px) {
+  /* .gamesWrapper {
+    grid-template-columns: 0.8fr;
+  } */
+}
+
 @media (max-width: 480px) {
-  .gamesWrapper {
+  .gamesWrapper,
+  .gamesWrapper.small {
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   }
   .gamesWrapper.resize {
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   }
+  /* .gamesWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  } */
+  /* .gamesWrapper.resize {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  } */
+  /* .gamesWrapper.small {
+    grid-template-columns: repeat(auto-fit, 0.1fr);
+  } */
   .gamePoster {
     padding: 0.3rem;
   }

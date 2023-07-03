@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { singleGame as data } from '../sampleData/sample';
+// import { singleGame as data } from '../sampleData/sample';
 import classes from './GameDetails.module.css';
 import parse from 'html-react-parser';
 import { Rating, Tooltip } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import GameVideos from './GameVideos';
-
-const yTKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+import {
+  useGetGameByIDQuery,
+  useGetGameDevTeamQuery,
+} from '../services/getGamesApi';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import Loader from './UI/Loader';
+import GamesBox from './GamesBox';
 
 const GameDetails = ({
   ratingClass,
@@ -15,16 +20,26 @@ const GameDetails = ({
   getDate,
   inversion,
   winSize,
+  slideIn,
 }) => {
-  const params = useParams();
-  // console.log(params?.gameId);
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
   const [seeMore, setSeeMore] = useState(false);
+  const params = useParams();
+
+  const { data, isFetching } = useGetGameByIDQuery(params?.gameId ?? skipToken);
+  const { data: gameDevs, isFetching: fetchingGameDevs } =
+    useGetGameDevTeamQuery(params?.gameId ?? skipToken);
+
+  if (isFetching || fetchingGameDevs) return <Loader />;
 
   const getFirstPara = str => {
     const paragraphs = str.split('</p>');
     const firstParagraph = paragraphs[0] + '</p>';
-    return parse(firstParagraph);
+    return {
+      para: parse(firstParagraph),
+      length: firstParagraph.length,
+    };
   };
 
   const getReaction = action => {
@@ -128,14 +143,16 @@ const GameDetails = ({
             Description:
             <span className={classes.desc}>
               {!seeMore &&
-                getFirstPara(data?.description.slice(0, 265) + '...')}
-              {seeMore && getFirstPara(data?.description)}
-              <button
-                className={classes.toggleBtn}
-                onClick={() => setSeeMore(prev => !prev)}
-              >
-                See {seeMore ? 'Less' : 'More'}
-              </button>
+                getFirstPara(data?.description.slice(0, 265) + '...').para}
+              {seeMore && getFirstPara(data?.description).para}
+              {getFirstPara(data?.description).length > 265 && (
+                <button
+                  className={classes.toggleBtn}
+                  onClick={() => setSeeMore(prev => !prev)}
+                >
+                  See {seeMore ? 'Less' : 'More'}
+                </button>
+              )}
             </span>
           </div>
           {/* //? User Res's */}
@@ -182,19 +199,66 @@ const GameDetails = ({
 
         {/* //?Right Side for Videos & SSs */}
         <div className={classes.right}>
-          <GameVideos
-            game={data?.name}
-            gameID={params?.gameId}
-            winSize={winSize}
-          />
+          <GameVideos game={data} gameID={params?.gameId} winSize={winSize} />
         </div>
         {/* </div> */}
       </div>
 
       {/* //? Bottom Details */}
       <div className={classes.bottomDetails}>
-        <h4>Other Games in the Series:</h4>
-        <h4>DLC's and Editions:</h4>
+        {/* //? SERIES */}
+        {data?.game_series_count >= 1 && (
+          <div>
+            <h4>Other Games in the Series:</h4>
+            <div className={classes.siblings}>
+              <GamesBox
+                slideIn={slideIn}
+                ratingClass={ratingClass}
+                winSize={winSize}
+                platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+                series={data?.id}
+                small
+              />
+            </div>
+          </div>
+        )}
+
+        {/* //? ADDITIONS */}
+        {data?.additions_count >= 1 && (
+          <div>
+            <h4>DLC's and Editions:</h4>
+            <div className={classes.siblings}>
+              <GamesBox
+                slideIn={slideIn}
+                ratingClass={ratingClass}
+                winSize={winSize}
+                platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+                additions={data?.id}
+                small
+              />
+            </div>
+          </div>
+        )}
+        {/* //? DEVS */}
+        <h4>Team:</h4>
+        <ul role="list" className={classes.devsInfo}>
+          {gameDevs?.results.map(
+            dev =>
+              dev?.image && (
+                <li key={dev?.id} className="flex">
+                  <img src={dev?.image} alt={dev?.id} />
+                  <p className="flex">
+                    {dev?.name}
+                    <span>({dev?.positions[0]?.name})</span>
+                  </p>
+                </li>
+              )
+          )}
+        </ul>
         <h4>
           Platforms:
           <span>

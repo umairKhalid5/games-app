@@ -34,7 +34,7 @@ html {
   --bgClr: var(--lightClr);
   --fgClr: var(--darkClr);
   --shadow: hsl(240, 7%, 5%, 0.3);
-  --bgOverlay: rgba(245, 251, 251, 0.8);
+  --bgOverlay: rgba(245, 251, 251, 0.7);
   --fontClr: rgba(41, 41, 41, 0.8);
 }
 /* Remove default margin */
@@ -302,6 +302,13 @@ nav .light-dark-mode {
   aspect-ratio: 16 / 9;
   padding-bottom: 1.2rem;
   margin-bottom: 1.2rem;
+}
+.loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (max-width: 600px) {

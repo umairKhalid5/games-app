@@ -8,6 +8,11 @@
   box-shadow: 0 0 15px var(--shadow);
   user-select: none;
   cursor: grab;
+  background-color: aqua;
+}
+.carouselContainer img {
+  width: 100%;
+  aspect-ratio: 1.777 / 1;
 }
 h3 {
   color: var(--accentClr);

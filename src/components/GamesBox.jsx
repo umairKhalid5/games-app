@@ -14,40 +14,72 @@ import { allGames } from '../sampleData/sample';
 import classes from './GamesBox.module.css';
 import Modal from './UI/Modal';
 import ExpandedGameCard from './ExpandedGameCard';
+import { useParams } from 'react-router-dom';
+import { skipToken } from '@reduxjs/toolkit/dist/query';
+import Loader from './UI/Loader';
+import { genres } from '../constants/constants';
 
 const GamesBox = ({
-  title,
   ratingClass,
   slideIn,
   winSize,
   platforms,
   getDate,
   inversion,
+  home,
+  series,
+  additions,
+  small,
 }) => {
+  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
   const [expandCard, setExpandCard] = useState(false);
   const [gameExpand, setGameExpand] = useState(null);
 
-  // const { data, isFetching } = useGetGamesQuery();
-  // const { data, isFetching } = useGetGameByIDQuery(3498);
+  const params = useParams();
 
-  // const { data, isFetching } = useGetGameSeriesQuery(3498);
+  const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery(
+    home ?? skipToken
+  );
 
-  // const { data, isFetching } = useGetGameByGenreQuery(15);
-  // const { data, isFetching } = useGetGamesByPlatformsQuery(1);
+  const { data: gamesByGenre, isFetching: fetchingGamesByGenre } =
+    useGetGamesByGenreQuery(params?.genre ?? skipToken);
 
-  // const { data, isFetching } = useGetGameTrailersQuery(3498);
-  // const { data, isFetching } = useGetGameAdditionsQuery(3498);
-  // const { data, isFetching } = useGetGameDevTeamQuery(3498);
-  // if (isFetching) return;
+  const { data: gamesByPlatform, isFetching: fetchingGamesByPlatform } =
+    useGetGamesByPlatformsQuery(params?.platform ?? skipToken);
 
-  // console.log(data);
+  const { data: gameSeries, isFetching: fetchingGameSeries } =
+    useGetGameSeriesQuery(series ?? skipToken);
 
-  // const platforms = [
-  //   { logo: 'src/assets/windows.png', name: 'PC', id: 1 },
-  //   { logo: 'src/assets/playstation.png', name: 'Playstation', id: 2 },
-  //   { logo: 'src/assets/xbox.png', name: 'Xbox', id: 3 },
-  //   { logo: 'src/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  // ];
+  const { data: gameAdds, isFetching: fetchingGameAdds } =
+    useGetGameAdditionsQuery(additions ?? skipToken);
+
+  if (
+    isFetchingAllGames ||
+    fetchingGamesByGenre ||
+    fetchingGamesByPlatform ||
+    fetchingGameSeries ||
+    fetchingGameAdds
+  )
+    return <Loader />;
+
+  // console.log(allGames, gamesByGenre, gamesByPlatform, gameSeries, gameAdds);
+
+  const gamesAvailable =
+    allGames?.results ??
+    gamesByGenre?.results ??
+    gamesByPlatform?.results ??
+    gameSeries?.results ??
+    gameAdds?.results;
+
+  if (!gamesAvailable) return;
+  const title = allGames
+    ? 'All Games'
+    : params?.genre
+    ? genres.find(pl => pl.id === +params?.genre).name
+    : params?.platform
+    ? platforms.find(pl => pl.id === +params?.platform).name
+    : '';
 
   const expandGameCard = game => {
     setGameExpand(game);
@@ -58,59 +90,69 @@ const GamesBox = ({
 
   return (
     <>
-      <h3>{title}</h3>
+      {!series && !additions && <h3>{title}:</h3>}
+      {/* {!series && !additions && <h3>Title:</h3>} */}
       <div className={classes.movieBox}>
         <div
-          className={`${classes.gamesWrapper} ${slideIn ? classes.resize : ''}`}
+          className={`${classes.gamesWrapper} ${slideIn && classes.resize} ${
+            small && classes.small
+          }`}
         >
-          {allGames.map(game => (
-            <div
-              key={game?.id}
-              className={classes.gamePoster}
-              onClick={() => expandGameCard(game)}
-            >
-              <img src={game?.background_image} alt={game?.name} />
+          {gamesAvailable?.map(
+            game =>
+              game?.background_image && (
+                <div
+                  key={game?.id}
+                  className={classes.gamePoster}
+                  onClick={() => expandGameCard(game)}
+                >
+                  <img src={game?.background_image} alt={game?.name} />
 
-              <p className={classes.title}>{game?.name}</p>
+                  <p className={classes.title}>{game?.name}</p>
 
-              <div className={classes.moreDetails}>
-                <span className={classes.platforms}>
-                  {platforms.map(entry =>
-                    game?.parent_platforms?.map(
-                      pt =>
-                        pt?.platform?.id === entry.id && (
-                          <img
-                            key={entry.id}
-                            src={entry.logo}
-                            alt={entry.name}
-                            style={{
-                              filter: `invert(${inversion})`,
-                            }}
-                          />
+                  <div className={classes.moreDetails}>
+                    <span className={classes.platforms}>
+                      {platforms.map(entry =>
+                        game?.parent_platforms?.map(
+                          pt =>
+                            pt?.platform?.id === entry.id && (
+                              <img
+                                key={entry.id}
+                                src={entry.logo}
+                                alt={entry.name}
+                                style={{
+                                  filter: `invert(${inversion})`,
+                                }}
+                              />
+                            )
                         )
-                    )
-                  )}
-                </span>
+                      )}
+                    </span>
 
-                <span className={classes.date}>{getDate(game?.released)}</span>
-              </div>
+                    <span className={classes.date}>
+                      {getDate(game?.released)}
+                    </span>
+                  </div>
 
-              <p className={classes.genre}>
-                {game?.genres.map(
-                  (genre, i) =>
-                    `${genre?.name}${i < game?.genres.length - 1 ? ', ' : ''}`
-                )}
-              </p>
+                  <p className={classes.genre}>
+                    {game?.genres.map(
+                      (genre, i) =>
+                        `${genre?.name}${
+                          i < game?.genres.length - 1 ? ', ' : ''
+                        }`
+                    )}
+                  </p>
 
-              <div className={classes.rating}>
-                <p>
-                  <span className={ratingClass(game?.metacritic)}>
-                    {game?.metacritic}
-                  </span>
-                </p>
-              </div>
-            </div>
-          ))}
+                  <div className={classes.rating}>
+                    <p>
+                      <span className={ratingClass(game?.metacritic)}>
+                        {game?.metacritic}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              )
+          )}
         </div>
       </div>
 

@@ -3,16 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 import GameDetails from './GameDetails';
+import { useGetGamesByPlatformsQuery } from '../services/getGamesApi';
 
-const Layout = ({ theme, slideIn, winSize }) => {
+const Layout = ({ theme, slideIn, winSize, platforms }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
-
-  const platforms = [
-    { logo: 'src/assets/windows.png', name: 'PC', id: 1 },
-    { logo: 'src/assets/playstation.png', name: 'Playstation', id: 2 },
-    { logo: 'src/assets/xbox.png', name: 'Xbox', id: 3 },
-    { logo: 'src/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  ];
 
   let options = {
     year: 'numeric',
@@ -31,9 +25,9 @@ const Layout = ({ theme, slideIn, winSize }) => {
     if (rating > 39 && rating < 60) return (classRating = 'rt_below_avg');
     if (rating < 40) return (classRating = 'rt_bad');
   };
+
   return (
     <div className="layout">
-      {/* <ImageSlider ratingClass={ratingClass} slideIn={slideIn} /> */}
       <Routes>
         <Route
           path="/"
@@ -42,31 +36,46 @@ const Layout = ({ theme, slideIn, winSize }) => {
               <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
               <GamesBox
                 slideIn={slideIn}
-                title={'All Games'}
+                // title={'All Games'}
                 ratingClass={ratingClass}
                 // theme={theme}
                 winSize={winSize}
                 platforms={platforms}
                 getDate={getDate}
                 inversion={inversion}
+                home
               />
             </>
           }
         />
-        {/* <Route
-          path="/"
+        <Route
+          path="/genre/:genre"
           element={
             <GamesBox
               slideIn={slideIn}
-              title={'All Games'}
               ratingClass={ratingClass}
-              theme={theme}
               winSize={winSize}
+              platforms={platforms}
+              getDate={getDate}
+              inversion={inversion}
             />
           }
-        /> */}
+        />
         <Route
-          path="/:gameId"
+          path="/platform/:platform"
+          element={
+            <GamesBox
+              slideIn={slideIn}
+              ratingClass={ratingClass}
+              winSize={winSize}
+              platforms={platforms}
+              getDate={getDate}
+              inversion={inversion}
+            />
+          }
+        />
+        <Route
+          path="/details/:gameId"
           element={
             <GameDetails
               ratingClass={ratingClass}
@@ -74,6 +83,7 @@ const Layout = ({ theme, slideIn, winSize }) => {
               getDate={getDate}
               inversion={inversion}
               winSize={winSize}
+              slideIn={slideIn}
             />
           }
         />

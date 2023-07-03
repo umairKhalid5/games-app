@@ -40,8 +40,7 @@ export const gamesApi = createApi({
     //   query: () => `platforms/lists/parents?key=${key}&page=1&page_size=20`,
     // }),
     getGamesByPlatforms: builder.query({
-      query: platform =>
-        `games?key=${key}&platforms=${platform}&page=5&page_size=20`,
+      query: platform => `games?key=${key}&page=1&parent_platforms=${platform}`,
     }),
   }),
 });

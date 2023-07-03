@@ -4,17 +4,20 @@ import classes from './ImageSlider.module.css';
 import { data1 } from '../sampleData/sample';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
+import Loader from './UI/Loader';
+import { useNavigate } from 'react-router-dom';
 
 const ImageSlider = ({ ratingClass, slideIn }) => {
-  // const { data, isFetching } = useGetGamesQuery();
+  const navigate = useNavigate();
+  const { data, isFetching } = useGetGamesQuery();
 
-  // if (isFetching) return;
+  if (isFetching) return <Loader />;
 
-  // console.log(data?.results);
+  const detailsHandler = id => navigate(`/details/${id}`);
 
   return (
     <>
-      <h3>Top Picks</h3>
+      <h3>Top Picks:</h3>
       <div
         className={`${classes.carouselContainer} ${
           slideIn ? classes.hideInfo : ''
@@ -29,7 +32,7 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
           width="100%"
           showThumbs={false}
         >
-          {data1?.results.map(game => (
+          {data?.results.map(game => (
             <div key={game?.id}>
               <img src={game?.background_image} alt={game?.name} />
               <p className={classes.title}>{game?.name}</p>
@@ -49,7 +52,9 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
                 </p>
               </div>
               <div className={classes?.moreBtn}>
-                <button>See Details</button>
+                <button onClick={() => detailsHandler(game?.id)}>
+                  See Details
+                </button>
               </div>
             </div>
           ))}
