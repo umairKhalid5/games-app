@@ -5,7 +5,7 @@ import Layout from './components/Layout';
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [slideIn, setSlideIn] = useState(true);
+  const [slideIn, setSlideIn] = useState(false);
   const [winSize, setWinSize] = useState(window.innerWidth);
 
   const platforms = [

@@ -32,7 +32,7 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
           width="100%"
           showThumbs={false}
         >
-          {data?.results.map(game => (
+          {data?.results?.slice(0, 10).map(game => (
             <div key={game?.id}>
               <img src={game?.background_image} alt={game?.name} />
               <p className={classes.title}>{game?.name}</p>

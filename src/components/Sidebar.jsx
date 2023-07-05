@@ -2,18 +2,11 @@ import React from 'react';
 import classes from './Sidebar.module.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { genres } from '../constants/constants';
 
 const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
-
-  // const platforms = [
-  //   { logo: 'src/assets/windows.png', name: 'PC', id: 1 },
-  //   { logo: 'src/assets/playstation.png', name: 'Playstation', id: 2 },
-  //   { logo: 'src/assets/xbox.png', name: 'Xbox', id: 3 },
-  //   { logo: 'src/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  // ];
 
   return (
     <div
@@ -32,7 +25,12 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
           </button>
           <ul role="list" className={classes.list}>
             {platforms.map(platform => (
-              <Link to={`/platform/${platform.id}`} key={platform.name}>
+              <NavLink
+                className={navData => (navData.isActive ? 'active' : '')}
+                to={`/platform/${platform.id}`}
+                key={platform.name}
+                onClick={() => setSlideIn(false)}
+              >
                 <li className="flex">
                   <div>
                     <img
@@ -45,21 +43,23 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
                   </div>
                   <p>{platform.name}</p>
                 </li>
-              </Link>
+              </NavLink>
             ))}
           </ul>
           <h3>Genres</h3>
           <ul role="list" className={classes.list}>
             {genres.map(platform => (
-              <Link
+              <NavLink
+                className={navData => (navData.isActive ? 'active' : '')}
                 // to={`/genre/${platform?.name.toLocaleLowerCase()}`}
                 to={`/genre/${platform?.id}`}
                 key={platform.name}
+                onClick={() => setSlideIn(false)}
               >
                 <li className="flex">
                   <p>{platform.name}</p>
                 </li>
-              </Link>
+              </NavLink>
             ))}
           </ul>
         </>

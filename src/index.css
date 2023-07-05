@@ -168,7 +168,11 @@ button {
   text-transform: capitalize;
   font-size: 1rem;
 }
-
+a.active > li {
+  background-color: var(--accentClr);
+  border-color: var(--accentClr);
+  font-weight: bold;
+}
 /* //! App */
 /* .app {
   width: 100%;
@@ -216,6 +220,21 @@ nav .menuBtn:hover,
 }
 nav .searchBar {
   flex: 0.9;
+  position: relative;
+}
+.searchBar .icon {
+  all: initial;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+  display: grid;
+  place-content: center;
+  border: none;
+  outline: none;
+}
+.icon svg {
+  color: var(--accentClr);
 }
 nav input {
   border-radius: 2rem;
@@ -227,6 +246,7 @@ nav input {
   color: var(--fgClr);
   transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
+
 nav input::placeholder {
   color: hsl(33, 79%, 53%, 0.8);
 }
@@ -303,12 +323,21 @@ nav .light-dark-mode {
   padding-bottom: 1.2rem;
   margin-bottom: 1.2rem;
 }
+/* //? LOADER */
 .loader {
   position: fixed;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+/* //? SEARCH FEED */
+.searchFeed h3 {
+  margin-bottom: 1.5rem;
+}
+.searchFeed h3 span {
+  margin-left: 0.2rem;
+  /* text-transform: capitalize; */
 }
 
 @media (max-width: 600px) {
@@ -341,5 +370,12 @@ nav .light-dark-mode {
   .light-dark-mode svg,
   .menuBtn svg {
     font-size: 1.2rem;
+  }
+  /* //? react-responsive-carousel */
+  .carousel .control-dots {
+    margin: 0.2rem 0;
+  }
+  .carousel .control-dots .dot {
+    margin-left: 0.3rem;
   }
 }

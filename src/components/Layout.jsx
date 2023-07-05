@@ -4,6 +4,7 @@ import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 import GameDetails from './GameDetails';
 import { useGetGamesByPlatformsQuery } from '../services/getGamesApi';
+import SearchFeed from './SearchFeed';
 
 const Layout = ({ theme, slideIn, winSize, platforms }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
@@ -84,6 +85,19 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               inversion={inversion}
               winSize={winSize}
               slideIn={slideIn}
+            />
+          }
+        />
+        <Route
+          path="/search/:searchTerm"
+          element={
+            <SearchFeed
+              slideIn={slideIn}
+              ratingClass={ratingClass}
+              winSize={winSize}
+              platforms={platforms}
+              getDate={getDate}
+              inversion={inversion}
             />
           }
         />

@@ -42,6 +42,10 @@ export const gamesApi = createApi({
     getGamesByPlatforms: builder.query({
       query: platform => `games?key=${key}&page=1&parent_platforms=${platform}`,
     }),
+    getSearchGames: builder.query({
+      query: term =>
+        `games?key=${key}&page=1&page_size=50&search=${term}&search_precise=true`,
+    }),
   }),
 });
 
@@ -58,4 +62,5 @@ export const {
   // useGetGameSellingStoresQuery,
   useGetGameAdditionsQuery,
   useGetGameDevTeamQuery,
+  useGetSearchGamesQuery,
 } = gamesApi;

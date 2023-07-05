@@ -9,6 +9,7 @@ import {
   useGetGameTrailersQuery,
   useGetGameAdditionsQuery,
   useGetGameDevTeamQuery,
+  useGetSearchGamesQuery,
 } from '../services/getGamesApi';
 import { allGames } from '../sampleData/sample';
 import classes from './GamesBox.module.css';
@@ -30,6 +31,7 @@ const GamesBox = ({
   series,
   additions,
   small,
+  searchTerm,
 }) => {
   // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
@@ -54,12 +56,24 @@ const GamesBox = ({
   const { data: gameAdds, isFetching: fetchingGameAdds } =
     useGetGameAdditionsQuery(additions ?? skipToken);
 
+  const { data: search, isFetching: fetchingSearch } = useGetSearchGamesQuery(
+    searchTerm ?? skipToken
+  );
+
+  let filtertedGames = [];
+  if (search) {
+    filtertedGames = search?.results.filter(
+      game => game?.rating > 0 && game?.background_image
+    );
+  }
+
   if (
     isFetchingAllGames ||
     fetchingGamesByGenre ||
     fetchingGamesByPlatform ||
     fetchingGameSeries ||
-    fetchingGameAdds
+    fetchingGameAdds ||
+    fetchingSearch
   )
     return <Loader />;
 
@@ -70,7 +84,8 @@ const GamesBox = ({
     gamesByGenre?.results ??
     gamesByPlatform?.results ??
     gameSeries?.results ??
-    gameAdds?.results;
+    gameAdds?.results ??
+    filtertedGames;
 
   if (!gamesAvailable) return;
   const title = allGames
@@ -90,7 +105,7 @@ const GamesBox = ({
 
   return (
     <>
-      {!series && !additions && <h3>{title}:</h3>}
+      {!series && !additions && !searchTerm && <h3>{title}:</h3>}
       {/* {!series && !additions && <h3>Title:</h3>} */}
       <div className={classes.movieBox}>
         <div

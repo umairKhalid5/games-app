@@ -8,7 +8,7 @@
   box-shadow: 0 0 15px var(--shadow);
   user-select: none;
   cursor: grab;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 .carouselContainer img {
   width: 100%;
@@ -80,7 +80,7 @@ h3 {
   .details {
     left: 2%;
     bottom: 4.2rem;
-    padding: 0.2rem;
+    padding: 0.3rem;
     font-size: 0.875rem;
   }
   .title {
@@ -98,12 +98,9 @@ h3 {
     bottom: 4.2rem;
   }
   .moreBtn button {
-    font-size: 0.9rem;
-    padding: 0.3rem 0.5rem;
+    font-size: 0.875rem;
+    padding: 0.5rem;
   }
-}
-
-@media (max-width: 720px) {
   .carouselContainer.hideInfo .details {
     display: none;
   }
@@ -113,5 +110,24 @@ h3 {
   .carouselContainer.hideInfo .moreBtn button {
     font-size: 12px;
     padding: 0.2rem 0.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 14px;
+  }
+  .details {
+    font-size: 12px;
+    padding: 0.2rem;
+  }
+  .details p span {
+    font-size: 14px;
+    width: 30px;
+    height: 20px;
+  }
+  .moreBtn button {
+    font-size: 13px;
+    padding: 0.4rem 0.3rem;
   }
 }

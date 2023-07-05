@@ -69,7 +69,6 @@
   background-color: var(--accentClr);
   border-color: var(--accentClr);
   font-weight: bold;
-  scale: 1.1;
 }
 .list:has(li:hover) li:not(:hover) {
   opacity: 0.6;
@@ -91,13 +90,14 @@
   }
   .list li {
     margin-left: 0rem;
-    padding: 0.2rem 0.1rem;
+    padding: 0.2rem 0.1rem 0.2rem 0.3rem;
   }
   .sidebarContainer h3 {
     font-size: 1rem;
   }
   .list li div {
     height: 14px;
+    margin-top: -0.35rem;
   }
   .list li p {
     font-size: 14px;
@@ -118,6 +118,7 @@
   }
   .list li div {
     height: 12px;
+    margin-top: -0.65rem;
   }
   .topBtn {
     height: 40px;

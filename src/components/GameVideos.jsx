@@ -53,7 +53,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
   return (
     <div className={classes.videosContainer}>
       {/* //? TRAILERS */}
-      {yTtrailers.length > 0 && (
+      {/* {yTtrailers.length > 0 && (
         <>
           <h3>Trailers</h3>
           <div>
@@ -65,7 +65,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
               useKeyboardArrows
               width="100%"
               showThumbs={false}
-              centerMode={true}
+              centerMode={winSize > 480 ? true : false}
               centerSlidePercentage={70}
             >
               {yTtrailers.map(trailer => (
@@ -79,7 +79,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
             </Carousel>
           </div>
         </>
-      )}
+      )} */}
       {/* //? GAMEPLAY */}
       {gameVids?.results?.length > 0 && (
         <>
@@ -87,14 +87,16 @@ const GameVideos = ({ game, gameID, winSize }) => {
           <div>
             <Carousel
               infiniteLoop
-              autoPlay
+              // autoPlay
               swipeable
               // emulateTouch
               useKeyboardArrows
               width="100%"
               showThumbs={false}
-              centerMode={true}
-              centerSlidePercentage={40}
+              // centerMode={true}
+              // centerSlidePercentage={40}
+              centerMode={winSize > 480 ? true : false}
+              centerSlidePercentage={50}
               selectedItem={2}
             >
               {gameVids?.results?.map(video => (
@@ -123,8 +125,10 @@ const GameVideos = ({ game, gameID, winSize }) => {
               useKeyboardArrows
               width="100%"
               showThumbs={false}
-              centerMode={true}
-              centerSlidePercentage={40}
+              // centerMode={true}
+              // centerSlidePercentage={40}
+              centerMode={winSize > 480 ? true : false}
+              centerSlidePercentage={50}
               selectedItem={2}
             >
               {gameSs?.results?.map(ss => (
