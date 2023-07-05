@@ -78,6 +78,13 @@
 .genre {
   font-size: 15px;
 }
+.buttons {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 100px 100px;
+  margin: 2rem 0;
+  place-content: center;
+}
 
 @media (max-width: 1000px) {
   /* .gamesWrapper {

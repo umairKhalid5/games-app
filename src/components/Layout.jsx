@@ -3,11 +3,15 @@ import { Route, Routes } from 'react-router-dom';
 import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 import GameDetails from './GameDetails';
-import { useGetGamesByPlatformsQuery } from '../services/getGamesApi';
 import SearchFeed from './SearchFeed';
+import { useGetGamesQuery } from '../services/getGamesApi';
 
 const Layout = ({ theme, slideIn, winSize, platforms }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
+
+  const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery();
+
+  if (isFetchingAllGames) return;
 
   let options = {
     year: 'numeric',
@@ -59,6 +63,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               platforms={platforms}
               getDate={getDate}
               inversion={inversion}
+              genre
             />
           }
         />
@@ -98,6 +103,20 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               platforms={platforms}
               getDate={getDate}
               inversion={inversion}
+            />
+          }
+        />
+        <Route
+          path="/all-games"
+          element={
+            <GamesBox
+              slideIn={slideIn}
+              ratingClass={ratingClass}
+              winSize={winSize}
+              platforms={platforms}
+              getDate={getDate}
+              inversion={inversion}
+              allGames2={allGames}
             />
           }
         />

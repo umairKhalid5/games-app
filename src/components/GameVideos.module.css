@@ -5,6 +5,9 @@
   gap: 0.5rem;
   user-select: none;
 }
+.videosContainer .screenShots {
+  cursor: pointer;
+}
 .videosContainer > div:not(.stores) {
   background-color: rgba(0, 0, 0, 1);
   box-shadow: 0 0 15px var(--shadow);
@@ -25,4 +28,14 @@
 }
 .stores:has(button:hover) button:not(:hover) {
   opacity: 0.6;
+}
+.expandedImg div {
+  position: absolute;
+  top: -2rem;
+  right: 0.1rem;
+  color: var(--accentClr);
+  cursor: pointer;
+}
+.expandedImg img {
+  min-width: 60vw;
 }

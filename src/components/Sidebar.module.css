@@ -6,23 +6,18 @@
   position: fixed;
   left: 0;
   top: 66px;
-  /* height: 100%; */
   bottom: -3rem;
-  transition: transform 0.3s ease;
-  z-index: 2;
-  /* overflow: hidden; */
+  /* transition: transform 0.3s ease; */
+  z-index: 40;
   overflow-y: auto;
   margin-bottom: 3rem;
+  width: 200px;
 }
 .sidebarContainer.show {
-  /* width: 200px; */
   transform: translateX(0);
 }
 .sidebarContainer.hide {
   transform: translateX(-120%);
-  /* width: 0;
-  padding: 0;
-  border: none; */
 }
 .sidebarContainer::-webkit-scrollbar {
   width: 3px !important;

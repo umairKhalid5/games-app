@@ -47,6 +47,17 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
           </ul>
           <h3>Genres</h3>
           <ul role="list" className={classes.list}>
+            <NavLink
+              className={navData => (navData.isActive ? 'active' : '')}
+              // to={`/genre/${platform?.name.toLocaleLowerCase()}`}
+              to="/all-games"
+              key="all-key"
+              onClick={() => setSlideIn(false)}
+            >
+              <li className="flex">
+                <p>All Games</p>
+              </li>
+            </NavLink>
             {genres.map(platform => (
               <NavLink
                 className={navData => (navData.isActive ? 'active' : '')}

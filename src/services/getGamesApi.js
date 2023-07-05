@@ -31,7 +31,8 @@ export const gamesApi = createApi({
       query: game_pk => `games/${game_pk}/game-series?key=${key}&page=1`,
     }),
     getGamesByGenre: builder.query({
-      query: genre => `games?key=${key}&page=1&genres=${genre}`,
+      query: ({ genre, page }) =>
+        `games?key=${key}&page=${page}&genres=${genre}`,
     }),
     // getGameGenres: builder.query({
     //   query: () => `genres?key=${key}&page=1&page_size=20`,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useGetGamesByGenreQuery,
   useGetGameByIDQuery,
@@ -11,11 +11,10 @@ import {
   useGetGameDevTeamQuery,
   useGetSearchGamesQuery,
 } from '../services/getGamesApi';
-import { allGames } from '../sampleData/sample';
 import classes from './GamesBox.module.css';
 import Modal from './UI/Modal';
 import ExpandedGameCard from './ExpandedGameCard';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
 import { genres } from '../constants/constants';
@@ -32,11 +31,22 @@ const GamesBox = ({
   additions,
   small,
   searchTerm,
+  allGames2,
+  genre,
 }) => {
-  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
   const [expandCard, setExpandCard] = useState(false);
   const [gameExpand, setGameExpand] = useState(null);
+
+  const currentPage = localStorage.getItem('PageNumber')
+    ? localStorage.getItem('PageNumber')
+    : 1;
+  localStorage.setItem('PageNumber', currentPage);
+
+  const [page, setPage] = useState(+currentPage);
+
+  // console.log(page);
 
   const params = useParams();
 
@@ -44,8 +54,10 @@ const GamesBox = ({
     home ?? skipToken
   );
 
+  const genreObj = genre ? { genre: params?.genre, page } : undefined;
+
   const { data: gamesByGenre, isFetching: fetchingGamesByGenre } =
-    useGetGamesByGenreQuery(params?.genre ?? skipToken);
+    useGetGamesByGenreQuery(genreObj ?? skipToken);
 
   const { data: gamesByPlatform, isFetching: fetchingGamesByPlatform } =
     useGetGamesByPlatformsQuery(params?.platform ?? skipToken);
@@ -67,6 +79,22 @@ const GamesBox = ({
     );
   }
 
+  useEffect(() => {
+    setPage(1);
+    localStorage.setItem('PageNumber', 1);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('PageNumber', page);
+  }, [page]);
+
+  useEffect(() => {
+    return () => {
+      setPage(1);
+      localStorage.setItem('PageNumber', 1);
+    };
+  }, [params?.genre, params?.platform]);
+
   if (
     isFetchingAllGames ||
     fetchingGamesByGenre ||
@@ -77,9 +105,22 @@ const GamesBox = ({
   )
     return <Loader />;
 
-  // console.log(allGames, gamesByGenre, gamesByPlatform, gameSeries, gameAdds);
+  // console.log(allGames ?? allGames2 ?? gamesByGenre ?? gamesByPlatform);
+
+  // console.log(gamesByGenre);
+  const nextPage =
+    allGames2?.next ??
+    allGames?.next ??
+    gamesByGenre?.next ??
+    gamesByPlatform?.next;
+  const prevPage =
+    allGames2?.previous ??
+    allGames?.previous ??
+    gamesByGenre?.previous ??
+    gamesByPlatform?.previous;
 
   const gamesAvailable =
+    allGames2?.results ??
     allGames?.results ??
     gamesByGenre?.results ??
     gamesByPlatform?.results ??
@@ -88,13 +129,14 @@ const GamesBox = ({
     filtertedGames;
 
   if (!gamesAvailable) return;
-  const title = allGames
-    ? 'All Games'
-    : params?.genre
-    ? genres.find(pl => pl.id === +params?.genre).name
-    : params?.platform
-    ? platforms.find(pl => pl.id === +params?.platform).name
-    : '';
+  const title =
+    allGames || allGames2
+      ? 'All Games'
+      : params?.genre
+      ? genres.find(pl => pl.id === +params?.genre).name
+      : params?.platform
+      ? platforms.find(pl => pl.id === +params?.platform).name
+      : '';
 
   const expandGameCard = game => {
     setGameExpand(game);
@@ -169,6 +211,23 @@ const GamesBox = ({
               )
           )}
         </div>
+
+        {genre && (
+          <div className={classes.buttons}>
+            <button
+              disabled={!prevPage}
+              onClick={() => setPage(prev => (prev -= 1))}
+            >
+              Prev
+            </button>
+            <button
+              disabled={!nextPage}
+              onClick={() => setPage(prev => (prev += 1))}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
 
       {expandCard && (
