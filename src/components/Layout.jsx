@@ -34,7 +34,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
           path="/"
           element={
             <>
-              <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
+              <ImageSlider ratingClass={ratingClass} />
               <GamesBox
                 slideIn={slideIn}
                 // title={'All Games'}

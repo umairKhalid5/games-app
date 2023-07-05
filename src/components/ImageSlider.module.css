@@ -101,7 +101,7 @@ h3 {
     font-size: 0.875rem;
     padding: 0.5rem;
   }
-  .carouselContainer.hideInfo .details {
+  /* .carouselContainer.hideInfo .details {
     display: none;
   }
   .carouselContainer.hideInfo .title {
@@ -110,7 +110,7 @@ h3 {
   .carouselContainer.hideInfo .moreBtn button {
     font-size: 12px;
     padding: 0.2rem 0.3rem;
-  }
+  } */
 }
 
 @media (max-width: 480px) {

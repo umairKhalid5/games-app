@@ -22,7 +22,7 @@ const GameDetails = ({
   winSize,
   slideIn,
 }) => {
-  // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
   const [seeMore, setSeeMore] = useState(false);
   const params = useParams();

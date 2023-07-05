@@ -1,7 +1,6 @@
 import React from 'react';
 import classes from './Sidebar.module.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { NavLink } from 'react-router-dom';
 import { genres } from '../constants/constants';
 
@@ -64,12 +63,6 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
           </ul>
         </>
       )}
-      <button
-        className={classes.topBtn}
-        onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })}
-      >
-        <ArrowUpwardIcon />
-      </button>
     </div>
   );
 };

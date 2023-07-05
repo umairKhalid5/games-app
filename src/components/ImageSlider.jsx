@@ -7,7 +7,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Loader from './UI/Loader';
 import { useNavigate } from 'react-router-dom';
 
-const ImageSlider = ({ ratingClass, slideIn }) => {
+const ImageSlider = ({ ratingClass }) => {
   const navigate = useNavigate();
   const { data, isFetching } = useGetGamesQuery();
 
@@ -18,11 +18,7 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
   return (
     <>
       <h3>Top Picks:</h3>
-      <div
-        className={`${classes.carouselContainer} ${
-          slideIn ? classes.hideInfo : ''
-        }`}
-      >
+      <div className={classes.carouselContainer}>
         <Carousel
           infiniteLoop
           autoPlay
@@ -37,7 +33,6 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
               <img src={game?.background_image} alt={game?.name} />
               <p className={classes.title}>{game?.name}</p>
               <div className={classes?.details}>
-                {/* <p>Playtime: {game?.playtime} hours</p> */}
                 <p>
                   Metacritic:{' '}
                   <span className={ratingClass(game?.metacritic)}>

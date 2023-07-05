@@ -68,7 +68,7 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
         <MenuIcon
           onClick={() => {
             setSlideIn(prev => !prev);
-            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+            // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           }}
           sx={{
             color: '#e58e27',

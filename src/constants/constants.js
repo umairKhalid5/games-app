@@ -19,3 +19,10 @@ export const genres = [
   { name: 'Educational', id: 34 },
   { name: 'Card', id: 17 },
 ];
+
+export const platforms = [
+  { logo: '/assets/windows.png', name: 'PC', id: 1 },
+  { logo: '/assets/playstation.png', name: 'Playstation', id: 2 },
+  { logo: '/assets/xbox.png', name: 'Xbox', id: 3 },
+  { logo: '/assets/nintendo.png', name: 'Nintendo', id: 7 },
+];

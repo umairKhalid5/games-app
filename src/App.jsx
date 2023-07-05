@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Layout from './components/Layout';
+import { platforms } from './constants/constants';
+import ScrollTopBtn from './components/ScrollTopBtn';
 
 function App() {
   const [theme, setTheme] = useState('light');
   const [slideIn, setSlideIn] = useState(false);
   const [winSize, setWinSize] = useState(window.innerWidth);
 
-  const platforms = [
-    { logo: '/assets/windows.png', name: 'PC', id: 1 },
-    { logo: '/assets/playstation.png', name: 'Playstation', id: 2 },
-    { logo: '/assets/xbox.png', name: 'Xbox', id: 3 },
-    { logo: '/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  ];
+  // const platforms = [
+  //   { logo: '/assets/windows.png', name: 'PC', id: 1 },
+  //   { logo: '/assets/playstation.png', name: 'Playstation', id: 2 },
+  //   { logo: '/assets/xbox.png', name: 'Xbox', id: 3 },
+  //   { logo: '/assets/nintendo.png', name: 'Nintendo', id: 7 },
+  // ];
 
   useEffect(() => {
     const updateWindowSize = () => {
@@ -46,6 +48,7 @@ function App() {
           winSize={winSize}
           platforms={platforms}
         />
+        <ScrollTopBtn />
       </main>
     </>
   );
