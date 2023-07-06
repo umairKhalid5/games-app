@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import classes from './ExpandedGameCard.module.css';
 import { Rating, Tooltip } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const ExpandedGameCard = ({
   game,
@@ -20,7 +21,12 @@ const ExpandedGameCard = ({
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className={`${classes.expandedCard} flex`}>
         <div className={classes.left}>
           <img src={game?.background_image} alt={game?.name} />
@@ -119,7 +125,7 @@ const ExpandedGameCard = ({
           </Carousel>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 };
 

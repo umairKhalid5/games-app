@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import logo from '../assets/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -54,7 +53,7 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
     const timer = setTimeout(() => {
       if (showSuggestions) setShowResults(true);
       else setShowResults(false);
-    }, 400);
+    }, 300);
 
     return () => {
       clearTimeout(timer);
@@ -68,7 +67,6 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
         <MenuIcon
           onClick={() => {
             setSlideIn(prev => !prev);
-            // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
           }}
           sx={{
             color: '#e58e27',

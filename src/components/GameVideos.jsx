@@ -8,6 +8,7 @@ import {
 import { Carousel } from 'react-responsive-carousel';
 import Modal from './UI/Modal';
 import CloseIcon from '@mui/icons-material/Close';
+import { motion } from 'framer-motion';
 
 const yTKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -61,33 +62,33 @@ const GameVideos = ({ game, gameID, winSize }) => {
     <>
       <div className={classes.videosContainer}>
         {/* //? TRAILERS */}
-        {/* {yTtrailers.length > 0 && (
-        <>
-          <h3>Trailers</h3>
-          <div>
-            <Carousel
-              infiniteLoop
-              //   autoPlay
-              swipeable
-              // emulateTouch
-              useKeyboardArrows
-              width="100%"
-              showThumbs={false}
-              centerMode={winSize > 480 ? true : false}
-              centerSlidePercentage={70}
-            >
-              {yTtrailers.map(trailer => (
-                <ReactPlayer
-                  key={trailer.id?.videoId}
-                  url={`https://www.youtube.com/watch?v=${trailer?.id?.videoId}`}
-                  className="react-player"
-                  controls
-                />
-              ))}
-            </Carousel>
-          </div>
-        </>
-      )} */}
+        {yTtrailers.length > 0 && (
+          <>
+            <h3>Trailers</h3>
+            <div>
+              <Carousel
+                infiniteLoop
+                //   autoPlay
+                swipeable
+                // emulateTouch
+                useKeyboardArrows
+                width="100%"
+                showThumbs={false}
+                centerMode={winSize > 480 ? true : false}
+                centerSlidePercentage={70}
+              >
+                {yTtrailers.map(trailer => (
+                  <ReactPlayer
+                    key={trailer.id?.videoId}
+                    url={`https://www.youtube.com/watch?v=${trailer?.id?.videoId}`}
+                    className="react-player"
+                    controls
+                  />
+                ))}
+              </Carousel>
+            </div>
+          </>
+        )}
         {/* //? GAMEPLAY */}
         {gameVids?.results?.length > 0 && (
           <>
@@ -168,12 +169,18 @@ const GameVideos = ({ game, gameID, winSize }) => {
 
       {showExpandedImg && (
         <Modal onClose={() => setShowExpandedImg(false)}>
-          <div className={classes.expandedImg}>
+          <motion.div
+            className={classes.expandedImg}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
             <img src={imageSrc} alt="img" loading="lazy" />
             <div onClick={() => setShowExpandedImg(false)}>
               <CloseIcon />
             </div>
-          </div>
+          </motion.div>
         </Modal>
       )}
     </>

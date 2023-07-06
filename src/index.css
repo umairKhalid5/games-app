@@ -28,6 +28,7 @@ html {
   --skipLight: #b3424b;
   --skipDark: #6e1f24;
   --bgOverlay: rgba(22, 26, 30, 0.8);
+  --sideBarOverlay: rgba(22, 26, 30, 0.8);
   --fontClr: rgba(214, 214, 214, 0.8);
 }
 .light {

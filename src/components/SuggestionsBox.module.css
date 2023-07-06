@@ -45,7 +45,6 @@
 @media (max-width: 1000px) {
   .suggestions {
     left: -4rem;
-    right: -3.5rem;
   }
 }
 @media (max-width: 480px) {

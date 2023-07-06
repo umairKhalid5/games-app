@@ -6,8 +6,8 @@
   height: 100vh;
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.75);
+  animation: show 300ms ease-out forwards;
 }
-
 .modal {
   position: fixed;
   top: 55%;
@@ -23,6 +23,14 @@
   animation: slide-down 300ms ease-out forwards;
 }
 
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes slide-down {
   from {
     opacity: 0;

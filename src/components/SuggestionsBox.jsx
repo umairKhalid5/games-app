@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { useGetSearchGamesQuery } from '../services/getGamesApi';
 import classes from './SuggestionsBox.module.css';
+import { motion } from 'framer-motion';
 
 const SuggestionsBox = ({ searchTerm, setSearchTerm, setShowSuggestions }) => {
   const { data, isFetching } = useGetSearchGamesQuery(searchTerm);
@@ -13,7 +14,13 @@ const SuggestionsBox = ({ searchTerm, setSearchTerm, setShowSuggestions }) => {
   );
 
   return (
-    <div className={`${classes.suggestions} suggestionsList`}>
+    <motion.div
+      className={`${classes.suggestions} suggestionsList`}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+    >
       <ul role="list">
         {filtertedGames.length < 1 && <li>No matches found</li>}
         {filtertedGames.length > 1 &&
@@ -36,7 +43,7 @@ const SuggestionsBox = ({ searchTerm, setSearchTerm, setShowSuggestions }) => {
             </Link>
           ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 

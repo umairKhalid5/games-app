@@ -1,13 +1,13 @@
 import React from 'react';
 import { useGetGamesQuery } from '../services/getGamesApi';
 import classes from './ImageSlider.module.css';
-import { data1 } from '../sampleData/sample';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { Carousel } from 'react-responsive-carousel';
 import Loader from './UI/Loader';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
-const ImageSlider = ({ ratingClass }) => {
+const ImageSlider = ({ ratingClass, slideIn }) => {
   const navigate = useNavigate();
   const { data, isFetching } = useGetGamesQuery(1);
 
@@ -18,7 +18,13 @@ const ImageSlider = ({ ratingClass }) => {
   return (
     <>
       <h3>Top Picks:</h3>
-      <div className={classes.carouselContainer}>
+      <motion.div
+        className={classes.carouselContainer}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <Carousel
           infiniteLoop
           autoPlay
@@ -54,7 +60,7 @@ const ImageSlider = ({ ratingClass }) => {
             </div>
           ))}
         </Carousel>
-      </div>
+      </motion.div>
     </>
   );
 };

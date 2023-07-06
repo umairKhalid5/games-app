@@ -14,6 +14,7 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
 import { genres, platforms } from '../constants/constants';
+import { motion } from 'framer-motion';
 
 const GamesBox = ({
   ratingClass,
@@ -128,19 +129,38 @@ const GamesBox = ({
     if (dir === 'next') {
       navigate(`?page=${page + 1}`);
       setPage(prev => (prev += 1));
-      // setAllGamesPage(prev => (prev += 1));
     } else {
       navigate(`?page=${page - 1}`);
       setPage(prev => (prev -= 1));
-      // setAllGamesPage(prev => (prev -= 1));
     }
+  };
+
+  const variants = {
+    hidden: {
+      opacity: 0,
+      x: '100vw',
+    },
+    visible: {
+      opacity: 1,
+      x: '0',
+      transition: { delay: 0.5, duration: 0.6 },
+    },
+    exit: {
+      opacity: 0,
+      x: '-100vw',
+    },
   };
 
   return (
     <>
       {!series && !additions && !searchTerm && <h3>{title}:</h3>}
-      {/* {!series && !additions && <h3>Title:</h3>} */}
-      <div className={classes.movieBox}>
+      <motion.div
+        className={classes.movieBox}
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
         <div
           className={`${classes.gamesWrapper} ${slideIn && classes.resize} ${
             small && classes.small
@@ -213,7 +233,7 @@ const GamesBox = ({
             </button>
           </div>
         )}
-      </div>
+      </motion.div>
 
       {expandCard && (
         <Modal onClose={closeGameCard}>

@@ -13,13 +13,6 @@ function App() {
   const [slideIn, setSlideIn] = useState(false);
   const [winSize, setWinSize] = useState(window.innerWidth);
 
-  // const platforms = [
-  //   { logo: '/assets/windows.png', name: 'PC', id: 1 },
-  //   { logo: '/assets/playstation.png', name: 'Playstation', id: 2 },
-  //   { logo: '/assets/xbox.png', name: 'Xbox', id: 3 },
-  //   { logo: '/assets/nintendo.png', name: 'Nintendo', id: 7 },
-  // ];
-
   useEffect(() => {
     const updateWindowSize = () => {
       const size = window.innerWidth;
@@ -59,5 +52,3 @@ function App() {
 }
 
 export default App;
-
-//? Pagination & darkMode-LocalStorage added

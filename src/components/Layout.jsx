@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
 import GameDetails from './GameDetails';
 import SearchFeed from './SearchFeed';
-import { useGetGamesQuery } from '../services/getGamesApi';
+import { AnimatePresence } from 'framer-motion';
 
 const Layout = ({ theme, slideIn, winSize }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
+  const location = useLocation();
   // const [allGamesPage, setAllGamesPage] = useState(1);
 
   // const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery();
@@ -34,96 +35,98 @@ const Layout = ({ theme, slideIn, winSize }) => {
 
   return (
     <div className="layout">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <ImageSlider ratingClass={ratingClass} />
+      <AnimatePresence>
+        <Routes location={location} key={location.key}>
+          <Route
+            path="/"
+            element={
+              <>
+                <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
+                <GamesBox
+                  slideIn={slideIn}
+                  // title={'All Games'}
+                  ratingClass={ratingClass}
+                  // theme={theme}
+                  winSize={winSize}
+                  // platforms={platforms}
+                  getDate={getDate}
+                  inversion={inversion}
+                  home
+                />
+              </>
+            }
+          />
+          <Route
+            path="/genre/:genre"
+            element={
               <GamesBox
                 slideIn={slideIn}
-                // title={'All Games'}
                 ratingClass={ratingClass}
-                // theme={theme}
                 winSize={winSize}
                 // platforms={platforms}
                 getDate={getDate}
                 inversion={inversion}
-                home
+                genre
               />
-            </>
-          }
-        />
-        <Route
-          path="/genre/:genre"
-          element={
-            <GamesBox
-              slideIn={slideIn}
-              ratingClass={ratingClass}
-              winSize={winSize}
-              // platforms={platforms}
-              getDate={getDate}
-              inversion={inversion}
-              genre
-            />
-          }
-        />
-        <Route
-          path="/platform/:platform"
-          element={
-            <GamesBox
-              slideIn={slideIn}
-              ratingClass={ratingClass}
-              winSize={winSize}
-              // platforms={platforms}
-              getDate={getDate}
-              inversion={inversion}
-              platform
-            />
-          }
-        />
-        <Route
-          path="/details/:gameId"
-          element={
-            <GameDetails
-              ratingClass={ratingClass}
-              // platforms={platforms}
-              getDate={getDate}
-              inversion={inversion}
-              winSize={winSize}
-              slideIn={slideIn}
-            />
-          }
-        />
-        <Route
-          path="/search/:searchTerm"
-          element={
-            <SearchFeed
-              slideIn={slideIn}
-              ratingClass={ratingClass}
-              winSize={winSize}
-              // platforms={platforms}
-              getDate={getDate}
-              inversion={inversion}
-            />
-          }
-        />
-        <Route
-          path="/all-games"
-          element={
-            <GamesBox
-              slideIn={slideIn}
-              ratingClass={ratingClass}
-              winSize={winSize}
-              // platforms={platforms}
-              getDate={getDate}
-              inversion={inversion}
-              allGames2
-              // setAllGamesPage={setAllGamesPage}
-            />
-          }
-        />
-      </Routes>
+            }
+          />
+          <Route
+            path="/platform/:platform"
+            element={
+              <GamesBox
+                slideIn={slideIn}
+                ratingClass={ratingClass}
+                winSize={winSize}
+                // platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+                platform
+              />
+            }
+          />
+          <Route
+            path="/details/:gameId"
+            element={
+              <GameDetails
+                ratingClass={ratingClass}
+                // platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+                winSize={winSize}
+                slideIn={slideIn}
+              />
+            }
+          />
+          <Route
+            path="/search/:searchTerm"
+            element={
+              <SearchFeed
+                slideIn={slideIn}
+                ratingClass={ratingClass}
+                winSize={winSize}
+                // platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+              />
+            }
+          />
+          <Route
+            path="/all-games"
+            element={
+              <GamesBox
+                slideIn={slideIn}
+                ratingClass={ratingClass}
+                winSize={winSize}
+                // platforms={platforms}
+                getDate={getDate}
+                inversion={inversion}
+                allGames2
+                // setAllGamesPage={setAllGamesPage}
+              />
+            }
+          />
+        </Routes>
+      </AnimatePresence>
     </div>
   );
 };

@@ -8,7 +8,6 @@
   box-shadow: 0 0 15px var(--shadow);
   user-select: none;
   cursor: grab;
-  /* background-color: aqua; */
 }
 .carouselContainer img {
   width: 100%;

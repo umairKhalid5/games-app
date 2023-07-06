@@ -7,18 +7,34 @@
   left: 0;
   top: 66px;
   bottom: -3rem;
-  /* transition: transform 0.3s ease; */
+  transition: transform 0.3s ease;
   z-index: 40;
   overflow-y: auto;
   margin-bottom: 3rem;
-  width: 200px;
-  transition: color 0.3s ease, background-color 0.3s ease;
+  width: 220px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+.sidebarBackdrop {
+  position: absolute;
+  inset: 0;
+  bottom: -3rem;
+  background: var(--sideBarOverlay);
+  z-index: 35;
+  transition: scale 0.3s ease;
+  transform-origin: right;
 }
 .sidebarContainer.show {
   transform: translateX(0);
 }
 .sidebarContainer.hide {
   transform: translateX(-120%);
+}
+.sidebarBackdrop.show {
+  scale: 1 1;
+}
+.sidebarBackdrop.hide {
+  scale: 0 1;
+  pointer-events: none;
 }
 .sidebarContainer::-webkit-scrollbar {
   width: 3px !important;
@@ -80,6 +96,7 @@
 @media (max-width: 600px) {
   .sidebarContainer {
     padding-inline: 0.3rem;
+    width: 170px;
   }
   .list li {
     margin-left: 0rem;

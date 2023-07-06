@@ -13,6 +13,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
 import GamesBox from './GamesBox';
 import { platforms } from '../constants/constants';
+import { motion } from 'framer-motion';
 
 const GameDetails = ({
   ratingClass,
@@ -63,7 +64,13 @@ const GameDetails = ({
       .map(pc => pc?.requirements[req]);
 
   return (
-    <div className={classes.detailsContainer}>
+    <motion.div
+      className={classes.detailsContainer}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className={classes.image}>
         <img src={data?.background_image} alt={data?.name} />
       </div>
@@ -280,7 +287,7 @@ const GameDetails = ({
           <span>{strFromArr(data?.tags)}</span>
         </h4>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
