@@ -2,9 +2,9 @@ import React from 'react';
 import classes from './Sidebar.module.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { NavLink } from 'react-router-dom';
-import { genres } from '../constants/constants';
+import { genres, platforms } from '../constants/constants';
 
-const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
+const Sidebar = ({ theme, slideIn, setSlideIn }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
 
   return (
@@ -26,7 +26,7 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
             {platforms.map(platform => (
               <NavLink
                 className={navData => (navData.isActive ? 'active' : '')}
-                to={`/platform/${platform.id}`}
+                to={`/platform/${platform.id}?page=1`}
                 key={platform.name}
                 onClick={() => setSlideIn(false)}
               >
@@ -49,7 +49,7 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
           <ul role="list" className={classes.list}>
             <NavLink
               className={navData => (navData.isActive ? 'active' : '')}
-              to="/all-games"
+              to="/all-games?page=1"
               key="all-key"
               onClick={() => setSlideIn(false)}
             >
@@ -61,7 +61,7 @@ const Sidebar = ({ theme, slideIn, setSlideIn, platforms }) => {
               <NavLink
                 className={navData => (navData.isActive ? 'active' : '')}
                 // to={`/genre/${platform?.name.toLocaleLowerCase()}`}
-                to={`/genre/${platform?.id}`}
+                to={`/genre/${platform?.id}?page=1`}
                 key={platform.name}
                 onClick={() => setSlideIn(false)}
               >

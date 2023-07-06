@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Layout from './components/Layout';
-import { platforms } from './constants/constants';
 import ScrollTopBtn from './components/ScrollTopBtn';
 
 function App() {
-  const [theme, setTheme] = useState('light');
+  const selectedTheme = localStorage.getItem('theme')
+    ? localStorage.getItem('theme')
+    : 'light';
+
+  const [theme, setTheme] = useState(selectedTheme);
   const [slideIn, setSlideIn] = useState(false);
   const [winSize, setWinSize] = useState(window.innerWidth);
 
@@ -30,6 +33,7 @@ function App() {
   useEffect(() => {
     if (theme === 'dark') document.body.className = 'dark';
     if (theme === 'light') document.body.className = 'light';
+    localStorage.setItem('theme', theme);
   }, [theme]);
 
   return (
@@ -40,13 +44,13 @@ function App() {
           theme={theme}
           slideIn={slideIn}
           setSlideIn={setSlideIn}
-          platforms={platforms}
+          // platforms={platforms}
         />
         <Layout
           theme={theme}
           slideIn={slideIn}
           winSize={winSize}
-          platforms={platforms}
+          // platforms={platforms}
         />
         <ScrollTopBtn />
       </main>
@@ -55,3 +59,5 @@ function App() {
 }
 
 export default App;
+
+//? Pagination & darkMode-LocalStorage added

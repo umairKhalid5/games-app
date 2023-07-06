@@ -6,7 +6,7 @@ export const gamesApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.rawg.io/api/' }),
   endpoints: builder => ({
     getGames: builder.query({
-      query: page => `games?key=${key}&page=1&page_size=20`,
+      query: page => `games?key=${key}&page=${page}&page_size=20`,
     }),
     getGameByID: builder.query({
       query: id => `games/${id}?key=${key}`,
@@ -34,14 +34,9 @@ export const gamesApi = createApi({
       query: ({ genre, page }) =>
         `games?key=${key}&page=${page}&genres=${genre}`,
     }),
-    // getGameGenres: builder.query({
-    //   query: () => `genres?key=${key}&page=1&page_size=20`,
-    // }),
-    // getGameParentPlatforms: builder.query({
-    //   query: () => `platforms/lists/parents?key=${key}&page=1&page_size=20`,
-    // }),
     getGamesByPlatforms: builder.query({
-      query: platform => `games?key=${key}&page=1&parent_platforms=${platform}`,
+      query: ({ platform, page }) =>
+        `games?key=${key}&page=${page}&parent_platforms=${platform}`,
     }),
     getSearchGames: builder.query({
       query: term =>

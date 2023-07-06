@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ImageSlider = ({ ratingClass }) => {
   const navigate = useNavigate();
-  const { data, isFetching } = useGetGamesQuery();
+  const { data, isFetching } = useGetGamesQuery(1);
 
   if (isFetching) return <Loader />;
 

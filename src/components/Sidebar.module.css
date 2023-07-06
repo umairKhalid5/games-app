@@ -12,6 +12,7 @@
   overflow-y: auto;
   margin-bottom: 3rem;
   width: 200px;
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 .sidebarContainer.show {
   transform: translateX(0);

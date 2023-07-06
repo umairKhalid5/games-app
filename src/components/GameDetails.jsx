@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-// import { singleGame as data } from '../sampleData/sample';
 import classes from './GameDetails.module.css';
 import parse from 'html-react-parser';
 import { Rating, Tooltip } from '@mui/material';
@@ -13,10 +12,11 @@ import {
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
 import GamesBox from './GamesBox';
+import { platforms } from '../constants/constants';
 
 const GameDetails = ({
   ratingClass,
-  platforms,
+  // platforms,
   getDate,
   inversion,
   winSize,

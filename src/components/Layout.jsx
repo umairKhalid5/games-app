@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import GamesBox from './GamesBox';
 import ImageSlider from './ImageSlider';
@@ -6,12 +6,13 @@ import GameDetails from './GameDetails';
 import SearchFeed from './SearchFeed';
 import { useGetGamesQuery } from '../services/getGamesApi';
 
-const Layout = ({ theme, slideIn, winSize, platforms }) => {
+const Layout = ({ theme, slideIn, winSize }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
+  // const [allGamesPage, setAllGamesPage] = useState(1);
 
-  const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery();
+  // const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery();
 
-  if (isFetchingAllGames) return;
+  // if (isFetchingAllGames) return;
 
   let options = {
     year: 'numeric',
@@ -45,7 +46,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
                 ratingClass={ratingClass}
                 // theme={theme}
                 winSize={winSize}
-                platforms={platforms}
+                // platforms={platforms}
                 getDate={getDate}
                 inversion={inversion}
                 home
@@ -60,7 +61,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               slideIn={slideIn}
               ratingClass={ratingClass}
               winSize={winSize}
-              platforms={platforms}
+              // platforms={platforms}
               getDate={getDate}
               inversion={inversion}
               genre
@@ -74,9 +75,10 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               slideIn={slideIn}
               ratingClass={ratingClass}
               winSize={winSize}
-              platforms={platforms}
+              // platforms={platforms}
               getDate={getDate}
               inversion={inversion}
+              platform
             />
           }
         />
@@ -85,7 +87,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
           element={
             <GameDetails
               ratingClass={ratingClass}
-              platforms={platforms}
+              // platforms={platforms}
               getDate={getDate}
               inversion={inversion}
               winSize={winSize}
@@ -100,7 +102,7 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               slideIn={slideIn}
               ratingClass={ratingClass}
               winSize={winSize}
-              platforms={platforms}
+              // platforms={platforms}
               getDate={getDate}
               inversion={inversion}
             />
@@ -113,10 +115,11 @@ const Layout = ({ theme, slideIn, winSize, platforms }) => {
               slideIn={slideIn}
               ratingClass={ratingClass}
               winSize={winSize}
-              platforms={platforms}
+              // platforms={platforms}
               getDate={getDate}
               inversion={inversion}
-              allGames2={allGames}
+              allGames2
+              // setAllGamesPage={setAllGamesPage}
             />
           }
         />

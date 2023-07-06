@@ -2,14 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import GamesBox from './GamesBox';
 
-const SearchFeed = ({
-  slideIn,
-  ratingClass,
-  winSize,
-  platforms,
-  getDate,
-  inversion,
-}) => {
+const SearchFeed = ({ slideIn, ratingClass, winSize, getDate, inversion }) => {
   const params = useParams();
 
   return (
@@ -21,7 +14,7 @@ const SearchFeed = ({
         slideIn={slideIn}
         ratingClass={ratingClass}
         winSize={winSize}
-        platforms={platforms}
+        // platforms={platforms}
         getDate={getDate}
         inversion={inversion}
         searchTerm={params?.searchTerm}

@@ -38,6 +38,16 @@ html {
   --fontClr: rgba(41, 41, 41, 0.8);
   --accentClr: hsl(33, 79%, 45%);
 }
+/* @media (prefers-color-scheme: light) {
+  :root {
+    --bgClr: var(--lightClr);
+    --fgClr: var(--darkClr);
+    --shadow: hsl(240, 7%, 5%, 0.3);
+    --bgOverlay: rgba(245, 251, 251, 0.7);
+    --fontClr: rgba(41, 41, 41, 0.8);
+    --accentClr: hsl(33, 79%, 45%);
+  }
+} */
 /* Remove default margin */
 body,
 h1,
@@ -165,6 +175,9 @@ button:disabled {
   box-shadow: none;
   opacity: 0.5;
 }
+button:disabled:is(:active, :focus) {
+  scale: 1;
+}
 /* //! Utility Classes */
 .flex {
   display: flex;
@@ -197,6 +210,7 @@ nav {
   z-index: 100;
   justify-content: space-between;
   border-bottom: 1px solid var(--accentClr);
+  transition: color 0.3s ease, background-color 0.3s ease;
 }
 .navbar {
   gap: 0.1rem;

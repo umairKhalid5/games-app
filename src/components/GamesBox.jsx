@@ -1,29 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import {
   useGetGamesByGenreQuery,
-  useGetGameByIDQuery,
-  useGetGameScreenShotsQuery,
   useGetGameSeriesQuery,
   useGetGamesQuery,
   useGetGamesByPlatformsQuery,
-  useGetGameTrailersQuery,
   useGetGameAdditionsQuery,
-  useGetGameDevTeamQuery,
   useGetSearchGamesQuery,
 } from '../services/getGamesApi';
 import classes from './GamesBox.module.css';
 import Modal from './UI/Modal';
 import ExpandedGameCard from './ExpandedGameCard';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
-import { genres } from '../constants/constants';
+import { genres, platforms } from '../constants/constants';
 
 const GamesBox = ({
   ratingClass,
   slideIn,
   winSize,
-  platforms,
   getDate,
   inversion,
   home,
@@ -33,34 +28,33 @@ const GamesBox = ({
   searchTerm,
   allGames2,
   genre,
+  platform,
 }) => {
   // window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  const params = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const [expandCard, setExpandCard] = useState(false);
   const [gameExpand, setGameExpand] = useState(null);
 
-  const currentPage = localStorage.getItem('PageNumber')
-    ? localStorage.getItem('PageNumber')
-    : 1;
-  localStorage.setItem('PageNumber', currentPage);
-
-  const [page, setPage] = useState(+currentPage);
-
-  // console.log(page);
-
-  const params = useParams();
-
-  const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery(
-    home ?? skipToken
-  );
+  const queryParams = new URLSearchParams(location.search).get('page');
+  const [page, setPage] = useState(+queryParams);
 
   const genreObj = genre ? { genre: params?.genre, page } : undefined;
+  const platformObj = platform
+    ? { platform: params?.platform, page }
+    : undefined;
+
+  const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery(
+    (home && 1) ?? (allGames2 && +queryParams) ?? skipToken
+  );
 
   const { data: gamesByGenre, isFetching: fetchingGamesByGenre } =
     useGetGamesByGenreQuery(genreObj ?? skipToken);
 
   const { data: gamesByPlatform, isFetching: fetchingGamesByPlatform } =
-    useGetGamesByPlatformsQuery(params?.platform ?? skipToken);
+    useGetGamesByPlatformsQuery(platformObj ?? skipToken);
 
   const { data: gameSeries, isFetching: fetchingGameSeries } =
     useGetGameSeriesQuery(series ?? skipToken);
@@ -73,27 +67,14 @@ const GamesBox = ({
   );
 
   let filtertedGames = [];
-  if (search) {
+  if (search)
     filtertedGames = search?.results.filter(
       game => game?.rating > 0 && game?.background_image
     );
-  }
 
   useEffect(() => {
-    setPage(1);
-    localStorage.setItem('PageNumber', 1);
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('PageNumber', page);
-  }, [page]);
-
-  useEffect(() => {
-    return () => {
-      setPage(1);
-      localStorage.setItem('PageNumber', 1);
-    };
-  }, [params?.genre, params?.platform]);
+    setPage(+queryParams);
+  }, [queryParams]);
 
   if (
     isFetchingAllGames ||
@@ -105,32 +86,30 @@ const GamesBox = ({
   )
     return <Loader />;
 
-  // console.log(allGames ?? allGames2 ?? gamesByGenre ?? gamesByPlatform);
-
   // console.log(gamesByGenre);
   const nextPage =
-    allGames2?.next ??
-    allGames?.next ??
-    gamesByGenre?.next ??
-    gamesByPlatform?.next;
+    (allGames2 && allGames?.next) ??
+    (genre && gamesByGenre?.next) ??
+    (platform && gamesByPlatform?.next);
+
   const prevPage =
-    allGames2?.previous ??
-    allGames?.previous ??
-    gamesByGenre?.previous ??
-    gamesByPlatform?.previous;
+    (allGames2 && allGames?.previous) ??
+    (genre && gamesByGenre?.previous) ??
+    (platform && gamesByPlatform?.previous);
 
   const gamesAvailable =
-    allGames2?.results ??
-    allGames?.results ??
-    gamesByGenre?.results ??
-    gamesByPlatform?.results ??
+    (platform && gamesByPlatform?.results) ??
+    // (allGames2 && allGames?.results) ??
+    ((home ?? allGames2) && allGames?.results) ??
+    (genre && gamesByGenre?.results) ??
     gameSeries?.results ??
     gameAdds?.results ??
-    filtertedGames;
+    (filtertedGames.length > 1 && filtertedGames);
 
   if (!gamesAvailable) return;
+
   const title =
-    allGames || allGames2
+    home ?? allGames2
       ? 'All Games'
       : params?.genre
       ? genres.find(pl => pl.id === +params?.genre).name
@@ -144,6 +123,18 @@ const GamesBox = ({
   };
 
   const closeGameCard = () => setExpandCard(false);
+
+  const pageHandler = dir => {
+    if (dir === 'next') {
+      navigate(`?page=${page + 1}`);
+      setPage(prev => (prev += 1));
+      // setAllGamesPage(prev => (prev += 1));
+    } else {
+      navigate(`?page=${page - 1}`);
+      setPage(prev => (prev -= 1));
+      // setAllGamesPage(prev => (prev -= 1));
+    }
+  };
 
   return (
     <>
@@ -212,18 +203,12 @@ const GamesBox = ({
           )}
         </div>
 
-        {genre && (
+        {(genre || platform || allGames2) && (
           <div className={classes.buttons}>
-            <button
-              disabled={!prevPage}
-              onClick={() => setPage(prev => (prev -= 1))}
-            >
+            <button disabled={!prevPage} onClick={() => pageHandler('prev')}>
               Prev
             </button>
-            <button
-              disabled={!nextPage}
-              onClick={() => setPage(prev => (prev += 1))}
-            >
+            <button disabled={!nextPage} onClick={() => pageHandler('next')}>
               Next
             </button>
           </div>
