@@ -75,7 +75,14 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
         />
       </div>
       <div>
-        <Link to="/" className="flex" onClick={() => setSlideIn(false)}>
+        <Link
+          to="/"
+          className="flex"
+          onClick={() => {
+            setSlideIn(false);
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+          }}
+        >
           <h4>GTRON</h4>
         </Link>
       </div>

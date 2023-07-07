@@ -39,13 +39,13 @@ function App() {
           setSlideIn={setSlideIn}
           // platforms={platforms}
         />
+        <ScrollTopBtn />
         <Layout
           theme={theme}
           slideIn={slideIn}
           winSize={winSize}
           // platforms={platforms}
         />
-        <ScrollTopBtn />
       </main>
     </>
   );

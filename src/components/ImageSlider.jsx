@@ -16,15 +16,14 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
   const detailsHandler = id => navigate(`/details/${id}`);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: '-100%' }}
+      animate={{ opacity: 1, y: '0' }}
+      exit={{ opacity: 0, y: '-100%' }}
+      transition={{ duration: 0.5 }}
+    >
       <h3>Top Picks:</h3>
-      <motion.div
-        className={classes.carouselContainer}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
+      <div className={classes.carouselContainer}>
         <Carousel
           infiniteLoop
           autoPlay
@@ -60,8 +59,8 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
             </div>
           ))}
         </Carousel>
-      </motion.div>
-    </>
+      </div>
+    </motion.div>
   );
 };
 

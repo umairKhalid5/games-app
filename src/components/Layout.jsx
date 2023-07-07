@@ -9,11 +9,6 @@ import { AnimatePresence } from 'framer-motion';
 const Layout = ({ theme, slideIn, winSize }) => {
   const inversion = theme === 'light' ? '0%' : '100%';
   const location = useLocation();
-  // const [allGamesPage, setAllGamesPage] = useState(1);
-
-  // const { data: allGames, isFetching: isFetchingAllGames } = useGetGamesQuery();
-
-  // if (isFetchingAllGames) return;
 
   let options = {
     year: 'numeric',
@@ -34,100 +29,100 @@ const Layout = ({ theme, slideIn, winSize }) => {
   };
 
   return (
-    <div className="layout">
-      <AnimatePresence>
-        <Routes location={location} key={location.key}>
-          <Route
-            path="/"
-            element={
-              <>
-                <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
-                <GamesBox
-                  slideIn={slideIn}
-                  // title={'All Games'}
-                  ratingClass={ratingClass}
-                  // theme={theme}
-                  winSize={winSize}
-                  // platforms={platforms}
-                  getDate={getDate}
-                  inversion={inversion}
-                  home
-                />
-              </>
-            }
+    // <AnimatePresence mode="wait">
+    //  <motion.div className="layout" key={'layoutKEY'}>
+    <Routes location={location} key={location.key}>
+      <Route
+        path="/"
+        element={
+          <>
+            <ImageSlider ratingClass={ratingClass} slideIn={slideIn} />
+            <GamesBox
+              slideIn={slideIn}
+              // title={'All Games'}
+              ratingClass={ratingClass}
+              // theme={theme}
+              winSize={winSize}
+              // platforms={platforms}
+              getDate={getDate}
+              inversion={inversion}
+              home
+            />
+          </>
+        }
+      />
+      <Route
+        path="/genre/:genre"
+        element={
+          <GamesBox
+            slideIn={slideIn}
+            ratingClass={ratingClass}
+            winSize={winSize}
+            // platforms={platforms}
+            getDate={getDate}
+            inversion={inversion}
+            genre
           />
-          <Route
-            path="/genre/:genre"
-            element={
-              <GamesBox
-                slideIn={slideIn}
-                ratingClass={ratingClass}
-                winSize={winSize}
-                // platforms={platforms}
-                getDate={getDate}
-                inversion={inversion}
-                genre
-              />
-            }
+        }
+      />
+      <Route
+        path="/platform/:platform"
+        element={
+          <GamesBox
+            slideIn={slideIn}
+            ratingClass={ratingClass}
+            winSize={winSize}
+            // platforms={platforms}
+            getDate={getDate}
+            inversion={inversion}
+            platform
           />
-          <Route
-            path="/platform/:platform"
-            element={
-              <GamesBox
-                slideIn={slideIn}
-                ratingClass={ratingClass}
-                winSize={winSize}
-                // platforms={platforms}
-                getDate={getDate}
-                inversion={inversion}
-                platform
-              />
-            }
+        }
+      />
+      <Route
+        path="/details/:gameId"
+        element={
+          <GameDetails
+            ratingClass={ratingClass}
+            // platforms={platforms}
+            getDate={getDate}
+            inversion={inversion}
+            winSize={winSize}
+            slideIn={slideIn}
           />
-          <Route
-            path="/details/:gameId"
-            element={
-              <GameDetails
-                ratingClass={ratingClass}
-                // platforms={platforms}
-                getDate={getDate}
-                inversion={inversion}
-                winSize={winSize}
-                slideIn={slideIn}
-              />
-            }
+        }
+      />
+      <Route
+        path="/search/:searchTerm"
+        element={
+          <SearchFeed
+            slideIn={slideIn}
+            ratingClass={ratingClass}
+            winSize={winSize}
+            // platforms={platforms}
+            getDate={getDate}
+            inversion={inversion}
           />
-          <Route
-            path="/search/:searchTerm"
-            element={
-              <SearchFeed
-                slideIn={slideIn}
-                ratingClass={ratingClass}
-                winSize={winSize}
-                // platforms={platforms}
-                getDate={getDate}
-                inversion={inversion}
-              />
-            }
+        }
+      />
+      <Route
+        path="/all-games"
+        element={
+          <GamesBox
+            slideIn={slideIn}
+            ratingClass={ratingClass}
+            winSize={winSize}
+            // platforms={platforms}
+            getDate={getDate}
+            inversion={inversion}
+            allGames2
+            // setAllGamesPage={setAllGamesPage}
           />
-          <Route
-            path="/all-games"
-            element={
-              <GamesBox
-                slideIn={slideIn}
-                ratingClass={ratingClass}
-                winSize={winSize}
-                // platforms={platforms}
-                getDate={getDate}
-                inversion={inversion}
-                allGames2
-                // setAllGamesPage={setAllGamesPage}
-              />
-            }
-          />
-        </Routes>
-      </AnimatePresence>
-    </div>
+        }
+      />
+    </Routes>
+    //  </motion.div>
+    // </AnimatePresence>
   );
 };
 

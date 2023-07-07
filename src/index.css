@@ -288,15 +288,16 @@ nav .light-dark-mode {
   font-size: 2rem;
 }
 .main {
-  display: flex;
-  position: relative;
-}
-.layout {
+  /* display: flex;
+  position: relative; */
   padding: 0.7rem 1rem;
   width: 100%;
-
-  /* overflow: hidden; */
+  position: relative;
 }
+/* .layout {
+  padding: 0.7rem 1rem;
+  width: 100%;
+} */
 .rt_top,
 .rt_good,
 .rt_below_avg,
@@ -370,14 +371,51 @@ nav .light-dark-mode {
   height: 50px;
   width: 50px;
   position: fixed;
-  right: 0.3rem;
+  right: 0.5rem;
   bottom: 1rem;
+  z-index: 50;
   box-shadow: 0 0 20px rgba(229, 142, 39, 0.7);
+  opacity: 0;
+  pointer-events: none;
+}
+.topBtn.show {
+  pointer-events: all;
+  animation: pop 300ms ease-out forwards;
+}
+.topBtn.remove {
+  pointer-events: none;
+  animation: out 300ms ease-out forwards;
+}
+@keyframes pop {
+  0% {
+    opacity: 0;
+    scale: 0.3;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.2;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes out {
+  from {
+    opacity: 1;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 0.3;
+  }
 }
 
 @media (max-width: 600px) {
   nav,
-  .layout {
+  .main {
     padding-inline: 0.3rem;
   }
   nav h4 {
@@ -412,6 +450,9 @@ nav .light-dark-mode {
   }
   .carousel .control-dots .dot {
     margin-left: 0.3rem;
+  }
+  h3 {
+    font-size: 1.1rem;
   }
 }
 @media (max-width: 400px) {

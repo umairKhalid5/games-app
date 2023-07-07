@@ -126,6 +126,8 @@ const GamesBox = ({
   const closeGameCard = () => setExpandCard(false);
 
   const pageHandler = dir => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
     if (dir === 'next') {
       navigate(`?page=${page + 1}`);
       setPage(prev => (prev += 1));
@@ -135,31 +137,21 @@ const GamesBox = ({
     }
   };
 
-  const variants = {
-    hidden: {
-      opacity: 0,
-      x: '100vw',
-    },
-    visible: {
-      opacity: 1,
-      x: '0',
-      transition: { delay: 0.5, duration: 0.6 },
-    },
-    exit: {
-      opacity: 0,
-      x: '-100vw',
-    },
-  };
-
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ delay: 0.3, duration: 0.8 }}
+    >
       {!series && !additions && !searchTerm && <h3>{title}:</h3>}
-      <motion.div
+      <div
         className={classes.movieBox}
-        variants={variants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+        // variants={variants}
+        // initial="hidden"
+        // animate="visible"
+        // exit="exit"
+        // style={{ transformOrigin: 'top' }}
       >
         <div
           className={`${classes.gamesWrapper} ${slideIn && classes.resize} ${
@@ -233,7 +225,7 @@ const GamesBox = ({
             </button>
           </div>
         )}
-      </motion.div>
+      </div>
 
       {expandCard && (
         <Modal onClose={closeGameCard}>
@@ -248,7 +240,7 @@ const GamesBox = ({
           />
         </Modal>
       )}
-    </>
+    </motion.div>
   );
 };
 

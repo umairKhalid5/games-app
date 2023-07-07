@@ -3,17 +3,18 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100vh;
+  bottom: -2rem;
   z-index: 20;
   background-color: rgba(0, 0, 0, 0.75);
   animation: show 300ms ease-out forwards;
 }
 .modal {
   position: fixed;
-  top: 55%;
+  top: 57%;
   left: 50%;
   translate: -50% -50%;
-  max-width: 98%;
+  margin-top: 1.5rem;
+  /* max-width: 98%; */
   background-color: var(--darkClr);
   color: var(--lightClr);
   padding: 1rem;
@@ -44,7 +45,7 @@
 
 @media (max-width: 950px) {
   .modal {
-    top: 55%;
+    /* top: 55%; */
     width: 75%;
   }
 }

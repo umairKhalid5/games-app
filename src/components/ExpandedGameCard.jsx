@@ -4,6 +4,7 @@ import { Rating, Tooltip } from '@mui/material';
 import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import CloseIcon from '@mui/icons-material/Close';
 
 const ExpandedGameCard = ({
   game,
@@ -31,7 +32,7 @@ const ExpandedGameCard = ({
         <div className={classes.left}>
           <img src={game?.background_image} alt={game?.name} />
           <button onClick={() => detailsHandler(game?.id)}>See Details</button>
-          <p>
+          <p className={classes.ratingBox}>
             Rating:
             <Tooltip title={game?.rating} placement="right-start">
               <span>
@@ -101,7 +102,7 @@ const ExpandedGameCard = ({
           </div>
         </div>
         <button className={classes.backBtn} onClick={() => onClose()}>
-          Go back
+          <CloseIcon />
         </button>
       </div>
       <div className={`${classes.screenShots} flex`}>
@@ -115,7 +116,7 @@ const ExpandedGameCard = ({
             width="100%"
             showThumbs={false}
             centerMode={true}
-            centerSlidePercentage={winSize > 950 ? 35 : winSize < 450 ? 50 : 35}
+            centerSlidePercentage={winSize > 950 ? 35 : winSize < 450 ? 45 : 35}
             selectedItem={2}
             showStatus={false}
           >

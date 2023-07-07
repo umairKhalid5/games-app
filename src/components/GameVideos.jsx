@@ -59,8 +59,19 @@ const GameVideos = ({ game, gameID, winSize }) => {
   if (fetchingGameVids || fetchingGameSs) return;
 
   return (
-    <>
-      <div className={classes.videosContainer}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ delay: 0.5, duration: 0.6 }}
+    >
+      <div
+        className={classes.videosContainer}
+        // initial={{ opacity: 0 }}
+        // animate={{ opacity: 1 }}
+        // exit={{ opacity: 0 }}
+        // transition={{ delay: 0.5, duration: 1 }}
+      >
         {/* //? TRAILERS */}
         {yTtrailers.length > 0 && (
           <>
@@ -183,7 +194,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
           </motion.div>
         </Modal>
       )}
-    </>
+    </motion.div>
   );
 };
 

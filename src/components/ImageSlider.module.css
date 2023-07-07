@@ -34,6 +34,7 @@ h3 {
   font-size: 1.125rem;
   padding: 0.7rem 1rem;
   box-shadow: 0 5px 10px rgba(229, 142, 39, 0.4);
+  min-width: max-content;
 }
 .details {
   left: 5%;

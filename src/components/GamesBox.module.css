@@ -34,13 +34,15 @@
   object-fit: cover;
   border-radius: 0.6rem;
 }
-.gamePoster:hover {
-  box-shadow: 0 0 15px rgba(229, 142, 39, 0.5);
-  scale: 1.05;
-}
-.gamesWrapper:has(.gamePoster:hover) .gamePoster:not(:hover) {
-  scale: 0.9;
-  opacity: 0.5;
+@media (hover: hover) {
+  .gamePoster:hover {
+    box-shadow: 0 0 15px rgba(229, 142, 39, 0.5);
+    /* scale: 1.05; */
+  }
+  .gamesWrapper:has(.gamePoster:hover) .gamePoster:not(:hover) {
+    scale: 0.9;
+    opacity: 0.5;
+  }
 }
 .title {
   font-weight: bold;
