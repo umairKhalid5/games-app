@@ -61,7 +61,7 @@ const GameDetails = ({
   const getRequirements = req =>
     data?.platforms
       .filter(plat => plat?.platform?.id === 4)
-      .map(pc => pc?.requirements[req]);
+      .map(pc => pc?.requirements[req] ?? 'Not Available');
 
   return (
     <motion.div
@@ -275,13 +275,16 @@ const GameDetails = ({
             )}
           </span>
         </h4>
-        <h4>
-          PC Requirements:
-          <strong>Minimum:</strong>
-          <span>{getRequirements('minimum')}</span>
-          <strong>Recommended:</strong>
-          <span>{getRequirements('recommended')}</span>
-        </h4>
+        {(getRequirements('minimum').length >= 1 ||
+          getRequirements('recommended').length >= 1) && (
+          <h4>
+            PC Requirements:
+            <strong>Minimum:</strong>
+            <span>{getRequirements('minimum')}</span>
+            <strong>Recommended:</strong>
+            <span>{getRequirements('recommended')}</span>
+          </h4>
+        )}
         <h4>
           Tags:
           <span>{strFromArr(data?.tags)}</span>

@@ -197,6 +197,9 @@ span.platforms {
     font-size: 1.8rem;
     margin: 0 auto 0.3rem;
   }
+  .bottomDetails {
+    margin-top: 1rem;
+  }
 }
 @media (max-width: 600px) {
   /* .devsInfo {

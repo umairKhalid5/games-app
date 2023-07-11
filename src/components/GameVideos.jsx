@@ -37,7 +37,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
   useEffect(() => {
     const fetchTrailer = async () => {
       const res = await fetch(
-        `${url}?q=${game?.name} trailer&part=snippet&maxResults=3`,
+        `${url}?q=${game?.name} game trailer&part=snippet&maxResults=3`,
         options
       );
       const data = await res.json();
@@ -75,7 +75,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
         {/* //? TRAILERS */}
         {yTtrailers.length > 0 && (
           <>
-            <h3>Trailers</h3>
+            <h3>Trailers and Videos</h3>
             <div>
               <Carousel
                 infiniteLoop
@@ -179,7 +179,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
       </div>
 
       {showExpandedImg && (
-        <Modal onClose={() => setShowExpandedImg(false)}>
+        <Modal onClose={() => setShowExpandedImg(false)} center>
           <motion.div
             className={classes.expandedImg}
             initial={{ opacity: 0 }}

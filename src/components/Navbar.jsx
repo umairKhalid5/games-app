@@ -23,6 +23,7 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
     navigate(`/search/${searchTerm}`);
     setSearchTerm('');
     setShowSuggestions(false);
+    setSlideIn(false);
   };
 
   const handleChange = e => {
@@ -104,6 +105,7 @@ const Navbar = ({ theme, setTheme, setSlideIn }) => {
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
             setShowSuggestions={setShowSuggestions}
+            setSlideIn={setSlideIn}
           />
         )}
       </div>

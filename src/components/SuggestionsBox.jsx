@@ -4,7 +4,12 @@ import { useGetSearchGamesQuery } from '../services/getGamesApi';
 import classes from './SuggestionsBox.module.css';
 import { motion } from 'framer-motion';
 
-const SuggestionsBox = ({ searchTerm, setSearchTerm, setShowSuggestions }) => {
+const SuggestionsBox = ({
+  searchTerm,
+  setSearchTerm,
+  setShowSuggestions,
+  setSlideIn,
+}) => {
   const { data, isFetching } = useGetSearchGamesQuery(searchTerm);
 
   if (isFetching) return;
@@ -31,6 +36,7 @@ const SuggestionsBox = ({ searchTerm, setSearchTerm, setShowSuggestions }) => {
               onClick={() => {
                 setShowSuggestions(false);
                 setSearchTerm('');
+                setSlideIn(false);
               }}
             >
               <li className="flex">
