@@ -179,7 +179,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
       </div>
 
       {showExpandedImg && (
-        <Modal onClose={() => setShowExpandedImg(false)} center>
+        <Modal onClose={() => setShowExpandedImg(false)} center noPadding>
           <motion.div
             className={classes.expandedImg}
             initial={{ opacity: 0 }}
@@ -187,7 +187,12 @@ const GameVideos = ({ game, gameID, winSize }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img src={imageSrc} alt="img" loading="lazy" />
+            <img
+              src={imageSrc}
+              alt="img"
+              loading="lazy"
+              style={{ borderRadius: '0.5rem' }}
+            />
             <div onClick={() => setShowExpandedImg(false)}>
               <CloseIcon />
             </div>

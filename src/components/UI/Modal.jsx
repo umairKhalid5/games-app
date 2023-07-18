@@ -12,6 +12,7 @@ const ModalOverlay = props => {
       className={classes.modal}
       style={{
         top: props?.center ? '50%' : '',
+        padding: props?.noPadding ? '0rem' : '1rem',
       }}
     >
       <div className={classes.content}>{props.children}</div>
@@ -29,7 +30,11 @@ const Modal = props => {
         portalElement
       )}
       {ReactDOM.createPortal(
-        <ModalOverlay children={props.children} center={props?.center}>
+        <ModalOverlay
+          children={props.children}
+          center={props?.center}
+          noPadding={props?.noPadding}
+        >
           {props.children}
         </ModalOverlay>,
         portalElement

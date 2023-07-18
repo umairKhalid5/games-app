@@ -29,6 +29,10 @@
 .stores:has(button:hover) button:not(:hover) {
   opacity: 0.6;
 }
+.expandedImg {
+  display: flex;
+  align-items: center;
+}
 .expandedImg div {
   position: absolute;
   top: -2rem;
