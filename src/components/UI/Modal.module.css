@@ -22,8 +22,6 @@
   box-shadow: 0 0 25px rgba(229, 142, 39, 0.2);
   z-index: 30;
   animation: slide-down 300ms ease-out forwards;
-  display: flex;
-  align-items: center;
 }
 
 @keyframes show {
