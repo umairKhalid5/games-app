@@ -139,114 +139,116 @@ const GamesBox = ({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
-    >
+    <>
       {!series && !additions && !searchTerm && <h3>{title}:</h3>}
-      <div
-        className={classes.movieBox}
-        // variants={variants}
-        // initial="hidden"
-        // animate="visible"
-        // exit="exit"
-        // style={{ transformOrigin: 'top' }}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.9 }}
+        transition={{ delay: 0.3, duration: 0.8 }}
       >
         <div
-          className={`${classes.gamesWrapper} ${slideIn && classes.resize} ${
-            small && classes.small
-          }`}
+          className={classes.movieBox}
+          // variants={variants}
+          // initial="hidden"
+          // animate="visible"
+          // exit="exit"
+          // style={{ transformOrigin: 'top' }}
         >
-          {gamesAvailable?.map(
-            game =>
-              game?.background_image && (
-                <div
-                  key={game?.id}
-                  className={classes.gamePoster}
-                  onClick={() => expandGameCard(game)}
-                >
-                  {/* <img src={game?.background_image} alt={game?.name} /> */}
-                  <Image
-                    src={game?.background_image}
-                    alt={game?.name}
-                    className={classes.posterImage}
-                  />
+          <div
+            className={`${classes.gamesWrapper} ${slideIn && classes.resize} ${
+              small && classes.small
+            }`}
+          >
+            {gamesAvailable?.map(
+              game =>
+                game?.background_image && (
+                  <div
+                    key={game?.id}
+                    className={classes.gamePoster}
+                    onClick={() => expandGameCard(game)}
+                  >
+                    {/* <img src={game?.background_image} alt={game?.name} /> */}
+                    <Image
+                      src={game?.background_image}
+                      alt={game?.name}
+                      className={classes.posterImage}
+                    />
 
-                  <p className={classes.title}>{game?.name}</p>
+                    <p className={classes.title}>{game?.name}</p>
 
-                  <div className={classes.moreDetails}>
-                    <span className={classes.platforms}>
-                      {platforms.map(entry =>
-                        game?.parent_platforms?.map(
-                          pt =>
-                            pt?.platform?.id === entry.id && (
-                              <img
-                                key={entry.id}
-                                src={entry.logo}
-                                alt={entry.name}
-                                style={{
-                                  filter: `invert(${inversion})`,
-                                }}
-                              />
-                            )
-                        )
-                      )}
-                    </span>
-
-                    <span className={classes.date}>
-                      {getDate(game?.released)}
-                    </span>
-                  </div>
-
-                  <p className={classes.genre}>
-                    {game?.genres.map(
-                      (genre, i) =>
-                        `${genre?.name}${
-                          i < game?.genres.length - 1 ? ', ' : ''
-                        }`
-                    )}
-                  </p>
-
-                  <div className={classes.rating}>
-                    <p>
-                      <span className={ratingClass(game?.metacritic)}>
-                        {game?.metacritic || 'NA'}
+                    <div className={classes.moreDetails}>
+                      <span className={classes.platforms}>
+                        {platforms.map(entry =>
+                          game?.parent_platforms?.map(
+                            pt =>
+                              pt?.platform?.id === entry.id && (
+                                <img
+                                  key={entry.id}
+                                  src={entry.logo}
+                                  alt={entry.name}
+                                  style={{
+                                    filter: `invert(${inversion})`,
+                                  }}
+                                />
+                              )
+                          )
+                        )}
                       </span>
+
+                      <span className={classes.date}>
+                        {getDate(game?.released)}
+                      </span>
+                    </div>
+
+                    <p className={classes.genre}>
+                      {game?.genres.map(
+                        (genre, i) =>
+                          `${genre?.name}${
+                            i < game?.genres.length - 1 ? ', ' : ''
+                          }`
+                      )}
                     </p>
+
+                    <div className={classes.rating}>
+                      <p>
+                        <span className={ratingClass(game?.metacritic)}>
+                          {game?.metacritic || 'NA'}
+                        </span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )
+                )
+            )}
+          </div>
+
+          {(genre || platform || allGames2) && (
+            <div className={classes.buttons}>
+              <button disabled={!prevPage} onClick={() => pageHandler('prev')}>
+                Prev
+              </button>
+              <button disabled={!nextPage} onClick={() => pageHandler('next')}>
+                Next
+              </button>
+            </div>
           )}
         </div>
 
-        {(genre || platform || allGames2) && (
-          <div className={classes.buttons}>
-            <button disabled={!prevPage} onClick={() => pageHandler('prev')}>
-              Prev
-            </button>
-            <button disabled={!nextPage} onClick={() => pageHandler('next')}>
-              Next
-            </button>
-          </div>
+        {expandCard && (
+          <Modal onClose={closeGameCard}>
+            <ExpandedGameCard
+              game={gameExpand}
+              getDate={getDate}
+              inversion={inversion}
+              platforms={platforms}
+              ratingClass={ratingClass}
+              onClose={closeGameCard}
+              winSize={winSize}
+            />
+          </Modal>
         )}
-      </div>
-
-      {expandCard && (
-        <Modal onClose={closeGameCard}>
-          <ExpandedGameCard
-            game={gameExpand}
-            getDate={getDate}
-            inversion={inversion}
-            platforms={platforms}
-            ratingClass={ratingClass}
-            onClose={closeGameCard}
-            winSize={winSize}
-          />
-        </Modal>
-      )}
-    </motion.div>
+      </motion.div>
+    </>
   );
 };
 

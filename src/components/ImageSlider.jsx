@@ -17,53 +17,57 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
   const detailsHandler = id => navigate(`/details/${id}`);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: '-100%' }}
-      animate={{ opacity: 1, y: '0' }}
-      exit={{ opacity: 0, y: '-100%' }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
       <h3>Top Picks:</h3>
-      <div className={classes.carouselContainer}>
-        <Carousel
-          infiniteLoop
-          autoPlay
-          swipeable
-          emulateTouch
-          useKeyboardArrows
-          width="100%"
-          showThumbs={false}
-          showStatus={false}
-        >
-          {data?.results?.slice(0, 10).map(game => (
-            <div key={game?.id}>
-              {/* <img src={game?.background_image} alt={game?.name} /> */}
-              <Image src={game?.background_image} alt={game?.name} />
-              <p className={classes.title}>{game?.name}</p>
-              <div className={classes?.details}>
-                <p>
-                  Metacritic:{' '}
-                  <span className={ratingClass(game?.metacritic)}>
-                    {game?.metacritic}
-                  </span>
-                </p>
-                <p>
-                  {game?.genres.map(
-                    (genre, i) =>
-                      `${genre?.name}${i < game?.genres.length - 1 ? ', ' : ''}`
-                  )}
-                </p>
+      <motion.div
+        initial={{ opacity: 0, y: '-100%' }}
+        animate={{ opacity: 1, y: '0' }}
+        exit={{ opacity: 0, y: '-100%' }}
+        transition={{ duration: 0.5 }}
+      >
+        <div className={classes.carouselContainer}>
+          <Carousel
+            infiniteLoop
+            autoPlay
+            swipeable
+            emulateTouch
+            useKeyboardArrows
+            width="100%"
+            showThumbs={false}
+            showStatus={false}
+          >
+            {data?.results?.slice(0, 10).map(game => (
+              <div key={game?.id}>
+                {/* <img src={game?.background_image} alt={game?.name} /> */}
+                <Image src={game?.background_image} alt={game?.name} />
+                <p className={classes.title}>{game?.name}</p>
+                <div className={classes?.details}>
+                  <p>
+                    Metacritic:{' '}
+                    <span className={ratingClass(game?.metacritic)}>
+                      {game?.metacritic}
+                    </span>
+                  </p>
+                  <p>
+                    {game?.genres.map(
+                      (genre, i) =>
+                        `${genre?.name}${
+                          i < game?.genres.length - 1 ? ', ' : ''
+                        }`
+                    )}
+                  </p>
+                </div>
+                <div className={classes?.moreBtn}>
+                  <button onClick={() => detailsHandler(game?.id)}>
+                    See Details
+                  </button>
+                </div>
               </div>
-              <div className={classes?.moreBtn}>
-                <button onClick={() => detailsHandler(game?.id)}>
-                  See Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      </div>
-    </motion.div>
+            ))}
+          </Carousel>
+        </div>
+      </motion.div>
+    </>
   );
 };
 

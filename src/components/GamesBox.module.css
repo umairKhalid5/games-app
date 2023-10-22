@@ -25,7 +25,7 @@
   display: grid;
   gap: 0.4rem;
   position: relative;
-  box-shadow: 0 0 10px var(--shadow);
+  /* box-shadow: 0 0 10px var(--shadow); */
   cursor: pointer;
 }
 /* .gamePoster span {
@@ -118,6 +118,7 @@
   } */
   .gamePoster {
     padding: 0.3rem;
+    border-radius: 0.6rem;
   }
   .date {
     font-size: 13px;
