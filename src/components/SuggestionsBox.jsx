@@ -41,9 +41,7 @@ const SuggestionsBox = ({
               }}
             >
               <li className="flex">
-                <div>
-                  <Image src={game?.background_image} alt={game?.name} />
-                </div>
+                <Image src={game?.background_image} alt={game?.name} />
                 {/* <img src={game?.background_image} alt={game?.name} /> */}
                 <div>
                   <p>{game?.name}</p>
