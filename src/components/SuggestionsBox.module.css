@@ -14,6 +14,8 @@
 .suggestions::-webkit-scrollbar {
   width: 4px;
 }
+/* .suggestions li span {
+} */
 .suggestions li {
   flex: 1;
   padding: 0.3rem;
@@ -28,11 +30,15 @@
 .suggestions li:not(:last-of-type) {
   margin-bottom: 0.2rem;
 }
+.suggestions li span {
+  margin-left: 0.5rem;
+  display: inline-flex !important;
+  width: 100px;
+}
 .suggestions li img {
-  max-width: 100px;
+  width: 100%;
   border-radius: 0.3rem;
   aspect-ratio: 1.777 / 1;
-  margin-left: 0.5rem;
 }
 .suggestions li p:first-of-type {
   font-weight: bold;
@@ -55,8 +61,8 @@
   .suggestions li p {
     font-size: 14px;
   }
-  .suggestions li img {
-    max-width: 50px;
+  .suggestions li span {
     margin-left: 0rem;
+    width: 70px;
   }
 }

@@ -9,6 +9,11 @@
   user-select: none;
   cursor: grab;
 }
+/* react-lazy-load-image-component */
+/* .carouselContainer span {
+  width: 100%;
+  height: 100%;
+} */
 .carouselContainer img {
   width: 100%;
   aspect-ratio: 1.777 / 1;

@@ -28,7 +28,12 @@
   box-shadow: 0 0 10px var(--shadow);
   cursor: pointer;
 }
-.gamePoster > img {
+/* .gamePoster span {
+  width: 100%;
+  height: 100%;
+} */
+.gamePoster > img,
+.posterImage {
   width: 100%;
   aspect-ratio: 1.77 / 1;
   object-fit: cover;

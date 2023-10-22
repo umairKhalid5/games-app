@@ -14,6 +14,7 @@ import Loader from './UI/Loader';
 import GamesBox from './GamesBox';
 import { platforms } from '../constants/constants';
 import { motion } from 'framer-motion';
+import Image from './UI/Image';
 
 const GameDetails = ({
   ratingClass,
@@ -72,7 +73,8 @@ const GameDetails = ({
       transition={{ duration: 0.5 }}
     >
       <div className={classes.image}>
-        <img src={data?.background_image} alt={data?.name} />
+        {/* <img src={data?.background_image} alt={data?.name} /> */}
+        <Image src={data?.background_image} alt={data?.name} />
       </div>
       <h2>{data?.name}</h2>
       <div className={classes.details}>
@@ -93,9 +95,9 @@ const GameDetails = ({
             Metacritic:
             <span
               className={ratingClass(data?.metacritic)}
-              style={{ marginTop: '-3px' }}
+              style={{ marginTop: '-3px', background: 'var(--bgOverlay)' }}
             >
-              {data?.metacritic}
+              {data?.metacritic || 'NA'}
             </span>
           </p>
           <p>

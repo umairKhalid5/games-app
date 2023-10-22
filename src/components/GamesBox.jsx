@@ -15,6 +15,7 @@ import { skipToken } from '@reduxjs/toolkit/dist/query';
 import Loader from './UI/Loader';
 import { genres, platforms } from '../constants/constants';
 import { motion } from 'framer-motion';
+import Image from './UI/Image';
 
 const GamesBox = ({
   ratingClass,
@@ -166,7 +167,12 @@ const GamesBox = ({
                   className={classes.gamePoster}
                   onClick={() => expandGameCard(game)}
                 >
-                  <img src={game?.background_image} alt={game?.name} />
+                  {/* <img src={game?.background_image} alt={game?.name} /> */}
+                  <Image
+                    src={game?.background_image}
+                    alt={game?.name}
+                    className={classes.posterImage}
+                  />
 
                   <p className={classes.title}>{game?.name}</p>
 
@@ -206,7 +212,7 @@ const GamesBox = ({
                   <div className={classes.rating}>
                     <p>
                       <span className={ratingClass(game?.metacritic)}>
-                        {game?.metacritic}
+                        {game?.metacritic || 'NA'}
                       </span>
                     </p>
                   </div>

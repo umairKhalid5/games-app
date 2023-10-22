@@ -9,6 +9,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Modal from './UI/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import { motion } from 'framer-motion';
+import Image from './UI/Image';
 
 const yTKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -153,12 +154,13 @@ const GameVideos = ({ game, gameID, winSize }) => {
                 onClickItem={(_, item) => showImage(item)}
               >
                 {gameSs?.results?.map(ss => (
-                  <img
-                    key={ss?.id}
-                    src={ss?.image}
-                    alt="game_ss"
-                    loading="lazy"
-                  />
+                  // <img
+                  //   key={ss?.id}
+                  //   src={ss?.image}
+                  //   alt="game_ss"
+                  //   loading="lazy"
+                  // />
+                  <Image key={ss?.id + '1'} src={ss?.image} />
                 ))}
               </Carousel>
             </div>
@@ -187,12 +189,7 @@ const GameVideos = ({ game, gameID, winSize }) => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <img
-              src={imageSrc}
-              alt="img"
-              loading="lazy"
-              style={{ borderRadius: '0.5rem' }}
-            />
+            <Image src={imageSrc} />
             <div onClick={() => setShowExpandedImg(false)}>
               <CloseIcon />
             </div>

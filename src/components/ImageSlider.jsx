@@ -6,6 +6,7 @@ import { Carousel } from 'react-responsive-carousel';
 import Loader from './UI/Loader';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import Image from './UI/Image';
 
 const ImageSlider = ({ ratingClass, slideIn }) => {
   const navigate = useNavigate();
@@ -32,10 +33,12 @@ const ImageSlider = ({ ratingClass, slideIn }) => {
           useKeyboardArrows
           width="100%"
           showThumbs={false}
+          showStatus={false}
         >
           {data?.results?.slice(0, 10).map(game => (
             <div key={game?.id}>
-              <img src={game?.background_image} alt={game?.name} />
+              {/* <img src={game?.background_image} alt={game?.name} /> */}
+              <Image src={game?.background_image} alt={game?.name} />
               <p className={classes.title}>{game?.name}</p>
               <div className={classes?.details}>
                 <p>

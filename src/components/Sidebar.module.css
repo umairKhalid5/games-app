@@ -22,6 +22,7 @@
   z-index: 35;
   transition: scale 0.3s ease;
   transform-origin: right;
+  backdrop-filter: blur(3px);
 }
 .sidebarContainer.show {
   transform: translateX(0);

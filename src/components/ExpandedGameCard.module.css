@@ -101,7 +101,7 @@ span.platforms {
   max-width: 850px;
 }
 .screenShots .carouselWrapper {
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(229, 142, 39, 0.35);
 }

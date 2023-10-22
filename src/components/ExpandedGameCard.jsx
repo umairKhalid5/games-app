@@ -5,6 +5,7 @@ import { Carousel } from 'react-responsive-carousel';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import CloseIcon from '@mui/icons-material/Close';
+import Image from './UI/Image';
 
 const ExpandedGameCard = ({
   game,
@@ -30,7 +31,8 @@ const ExpandedGameCard = ({
     >
       <div className={`${classes.expandedCard} flex`}>
         <div className={classes.left}>
-          <img src={game?.background_image} alt={game?.name} />
+          {/* <img src={game?.background_image} alt={game?.name} /> */}
+          <Image src={game?.background_image} alt={game?.name} />
           <button onClick={() => detailsHandler(game?.id)}>See Details</button>
           <p className={classes.ratingBox}>
             Rating:
@@ -121,7 +123,8 @@ const ExpandedGameCard = ({
             showStatus={false}
           >
             {game?.short_screenshots.map(ss => (
-              <img key={ss?.id} src={ss?.image} alt="img" loading="lazy" />
+              // <img key={ss?.id} src={ss?.image} alt="img" loading="lazy" />
+              <Image key={ss?.id} src={ss?.image} />
             ))}
           </Carousel>
         </div>

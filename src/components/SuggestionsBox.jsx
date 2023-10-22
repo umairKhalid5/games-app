@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useGetSearchGamesQuery } from '../services/getGamesApi';
 import classes from './SuggestionsBox.module.css';
 import { motion } from 'framer-motion';
+import Image from './UI/Image';
 
 const SuggestionsBox = ({
   searchTerm,
@@ -40,7 +41,10 @@ const SuggestionsBox = ({
               }}
             >
               <li className="flex">
-                <img src={game?.background_image} alt={game?.name} />
+                <div>
+                  <Image src={game?.background_image} alt={game?.name} />
+                </div>
+                {/* <img src={game?.background_image} alt={game?.name} /> */}
                 <div>
                   <p>{game?.name}</p>
                   <p>({new Date(game?.released).getFullYear()})</p>
